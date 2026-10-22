@@ -1,0 +1,244 @@
+package frc.robot;
+
+import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
+
+import edu.wpi.first.math.geometry.Translation2d;
+
+public class Constants {
+    /*
+     * Rules & Syntax for the Constants Folder
+     *
+     * RULES
+     * PID Settings
+     * 
+     * P, I and D are the main things to change, 
+     * since all of the other constants should not be changed
+     * 
+     * P is the proportional value for the error movement, so it grabs P percent (1 is 100%)
+     * of the error to move. This should be the main way to change PID.
+     * I is the integral, which just adds up all previous error then adds I percent (1 is 100%)
+     * This is usually the last thing to change.
+     * D is the derivative, which uses the derivative of the error, at D percent (1 is 100%)
+     * This is the second best way to tune PID, and intuitively, makes the movement rate match the desired rate of change
+     * 
+     * S is the voltage to overcome friction
+     * A is the amount of voltage needed to set acceleration to 1 m/s^2
+     * V is the amount of voltage needed to set velocity to 1 m/s
+     * G is the amount of voltage needed to negate the gravitational pull
+     * 
+     * 
+     * Motion Magic Settings
+     * 
+     * Motion Magic is used to make the desired movement smoother, to ensure that 
+     * there is less erratic movement
+     * 
+     * There are two types of motion magic: Position, which has a specific position (in rotations) to go, and Velocity, which has a set velocity goal (in rotations/second). 
+     * All position motion magic uses MotionMagicExpoTorqueFOC
+     * All velocity motion magic uses MotionMagicVelocityTorqueFOC
+     * 
+     * For position, there are 3 values:
+     * Cruise, which is the maximum velocity of the profile during the movement (This can be set to 0 for unlimited speed cap)
+     * kA, which is the voltage needed to get 1 rotations/second^2
+     * kV, which is the voltage needed to get 1 rotations/second
+     * 
+     * For velocity, there are 2 values:
+     * Acceleration, which is the final acceleration goal to reach
+     * Jerk, which is how fast the mechanism will reach the max acceleration. But, this is not in seconds. 
+     * Instead, think of it like   "The amount of acceleration added per second", so a jerk 10x the acceleration
+     *(the default jerk), means that the max acceleration will be reached in 0.1 seconds, since you are
+     * "adding" 10x the max acceleration per second.
+     * 
+     * 
+     * As long as the robot or the electronics do not change, don't touch any device IDs
+     * Any other miscellanious constants have their units and descriptions written on them.
+     * 
+     * OTHER COMMON WORDS:
+     * GearRatio
+     * 
+     * The ratio of movement between the motor and mechanism, motor and encoder, or encoder and mechanism
+     * Simply, the number is how many rotations the mechanism / encoder will do for 1 rotation of motor / encoder, dependant on context.
+     * If there is no encoder, the GR is always Motor --> Mechanism and the value will simple say (___GearRatio)
+     * If there is an encoder, there are two GRs: Motor --> Encoder (___GearRatioMtE) and Encoder --> Mechanism (___GearRatioEtMc)
+     * 
+     * CurrentLimit
+     * The maximum amount of voltage that can go to the piece in question, in Volts
+     * 
+     * Tolerance
+     * The amount of error (±) that the code can accept away from the target speed to consider it a valid value (speed or position)
+     * 
+     * SYNTAX
+     * Lowercase items are the objects created by the folder
+     * "s" are for the classes, or "subsystems", of the constants/mechanisms
+     * "d" is for Device ID
+     * "f" is for CANCoder gains
+     * "r" is for CANRange gains
+     * "p" is for PID gains
+     * "mm" is for Motion Magic gains
+     * "i" is for SysID gains
+     * "s" (in a class) is for state-space gains (only for shooter)
+     * "c" is for other motor configs
+     * "t" is for tolerances
+     * "k" is for miscellanious constants
+     * If there is no letter at the start (like the limelight constants), it is because there is no good way to separate them. 
+     * 
+     * Every word in a constant starts with a capital letter and acronyms have all letters capitalized.
+     */
+    public class sIntake{
+        //Device IDs   
+        public static final int dRollerLeaderID = 20;
+        public static final int dRollerFollowerID = 21;
+        public static final int dPivotID = 22;
+
+        //PID Gains
+        public static final double pRollerS = 0; //TODO
+        public static final double pRollerA = 0; //TODO
+        public static final double pRollerV = 0; //TODO
+        public static final double pRollerP = 25; //TODO
+        public static final double pRollerI = 0; //TODO
+        public static final double pRollerD = 0; //TODO
+
+        public static final double pPivotS = 0; //TODO
+        public static final double pPivotA = 0; //TODO
+        public static final double pPivotV = 0; //TODO
+        public static final double pPivotG = 0; //TODO
+        public static final double pPivotP = 25; //TODO
+        public static final double pPivotI = 0; //TODO
+        public static final double pPivotD = 0; //TODO
+
+        //Motor Configs
+        public static final double cRollerGearRatio = 0.6667;
+        public static final double cPivotGearRatio = 0.5; //TODO
+        
+        public static final int cRollerCurrentLimit = 50; //TODO
+        public static final int cPivotCurrentLimit = 50; //TODO
+
+        //Tolerances
+
+        public static final double tRollerTolerance = 1; //RotationsPerSecond //TODO
+        public static final double tPivotTolerance = 0.05; //Rotations //TODO
+
+        //Misc
+        public static final double kPivotOpenPosition = 0.0; //Rotations | The encoder rotation value when the intake is OPEN
+        public static final double kPivotClosedPosition = 0.1; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
+        public static final double kRollerSpeed = 10; //RotationsPerSecond //TODO
+
+    }
+    public class sIndexer{
+        //Devide IDs
+        public static final int dIndexerMotorID = 30;
+
+        //PID
+        public static final double pIndexerS = 0; //TODO
+        public static final double pIndexerA = 0; //TODO
+        public static final double pIndexerV = 0; //TODO
+        public static final double pIndexerP = 25; //TODO
+        public static final double pIndexerI = 0; //TODO
+        public static final double pIndexerD = 0; //TODO
+
+        //MotionMagic 
+        public static final double mmIndexerAcceleration = 100; //TODO
+        public static final double mmIndexerJerk = 1000; //TODO
+
+        //Motor Configs
+        public static final double cIndexerGearRatio = 0.6667;
+        public static final int cIndexerCurrentLimit = 50; //TODO
+
+        //Tolerances
+        public static final double tIndexerTolerance = 1; //RotationsPerSecond //TODO
+
+        //Misc
+        public static final double fIndexerSpeed = 10; //RotationsPerSecond //TODO
+    }
+    public class sShooter{
+        //Devide IDs
+        public static final int dLeftShooterLeaderID = 40; //TODO
+        public static final int dLeftShooterFollowerID = 41; //TODO 
+        public static final int dRightShooterLeaderID = 42; //TODO
+        public static final int dRightShooterFollowerID = 43; //TODO
+        public static final int dKickerID = 44; //TODO
+        public static final int dHoodID = 45; //TODO  
+        public static final int dHoodEncoder = 46; //TODO
+        public static final int dRangeLeft = 47; //TODO
+        public static final int dRangeRight = 48; //TODO
+
+        //CANCoder Configs
+        public static final double fMagnetOffset = 0; //TODO
+        public static final double fDiscontinuityPoint = 0; //TODO
+        public static final SensorDirectionValue fSensorDirection = SensorDirectionValue.CounterClockwise_Positive; //TODO
+
+        //CANRange Configs
+        public static final double rDetectionRange = 0.1; //Meters | The treshold for the detection range, any distance below this is considered "detected"
+        public static final double rMinSignalStrength = 2500; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
+
+        //PID Gains
+        public static final double cFlywheelS = 0; //TODO
+        public static final double cFlywheelA = 0; //TODO
+        public static final double cFlywheelV = 0; //TODO
+        public static final double cFlywheelP = 25; //TODO
+        public static final double cFlywheelI = 0; //TODO
+        public static final double cFlywheelD = 0; //TODO
+
+        public static final double cKickerkS = 0; //TODO
+        public static final double cKickerkA = 0; //TODO
+        public static final double cKickerkV = 0; //TODO
+        public static final double cKickerkP = 25; //TODO
+        public static final double cKickerkI = 0; //TODO
+        public static final double cKickerkD = 0; //TODO
+
+        public static final double cHoodG = 0; //TODO
+        public static final double cHoodS = 0; //TODO
+        public static final double cHoodA = 0; //TODO
+        public static final double cHoodV = 0; //TODO
+        public static final double cHoodP = 25; //TODO
+        public static final double cHoodI = 0; //TODO
+        public static final double cHoodD = 0; //TODO
+
+        //MotionMagic Gains
+        public static final double mmFlywheelAcceleration = 100; //TODO
+        public static final double mmFlywheelJerk = 1000; //TODO
+
+        public static final double mmKickerAcceleration = 100; //TODO 
+        public static final double mmKickerJerk = 1000; //TODO
+
+        public static final double mmHoodCruise = 115.0; //TODO
+        public static final double mmHoodkA = 0.01; //TODO
+        public static final double mmHoodkV = 0.01; //TODO
+
+        //Motor Configs
+        public static final double cFlywheelGearRatio = 0.6667;
+        public static final double cHoodGearRatioMtE = 0.5; //TODO
+        public static final double cHoodGearRatioEtMc = 1; //TODO
+        public static final double cKickerGearRatio = 0.6667; 
+
+        public static final double cFlywheelCurrentLimit = 50; //TODO
+        public static final double cHoodCurrentLimit = 50; //TODO
+        public static final double cKickerCurrentLimit = 50; //TODO
+
+        public static final InvertedValue cLeftFlywheelModuleInverted = InvertedValue.Clockwise_Positive; //TODO
+        public static final InvertedValue cRightFlywheelModuleInverted = InvertedValue.CounterClockwise_Positive; //TODO
+
+        //Tolerances
+        public static final double tFlywheelTolerance = 5; //RotationsPerSecond //TODO
+        public static final double tHoodTolerance = 0.1; //Rotations //TODO
+        public static final double tKickerTolerance = 5; //RotationsPerSecond //TODO
+
+        //Misc
+        public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond //TODO
+        public static final double kFlywheelFeedSpeed = 40; //RotationsPerSecond | The speed of the flywheel while feeding
+        
+        public static final double kHoodMinAngle = 0; //Degrees //TODO
+        public static final double kHoodMaxAngle = 180; //Degrees //TODO
+        public static final double kHoodClosedAngle = 10; //Degrees | The angle of the hood when it is not in use //TODO
+
+        public static final double kKickerSpeed = 20; //RotationsPerSecond //TODO
+
+        public static final double kFlywheelMult = 1.76; //The multiplier on the distance calculation
+        public static final double kFlywheelRadius = 0.04; //Meters //TODO
+        
+        public static final double kFlywheelHeight = 0.1; //Meters //TODO
+        public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0); //TODO
+
+        public static final double kHoodDegreeToRotation = 0.1; //RotationPerDegree | How many rotations is 1 degree //TODO
+    }
+}
