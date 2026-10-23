@@ -74,6 +74,7 @@ import frc.robot.subsystems.Shooter;
      * The amount of error (±) that the code can accept away from the target speed to consider it a valid value (speed or position)
      * 
      * SYNTAX
+     * 
      * Lowercase items are the objects created by the folder
      * "s" are for the classes, or "subsystems", of the constants/mechanisms
      * "d" is for Device ID
@@ -88,6 +89,11 @@ import frc.robot.subsystems.Shooter;
      * "k" is for miscellanious constants
      * If there is no letter at the start (like the limelight constants), it is because there is no good way to separate them. 
      * 
+     * There is a separate naming scheme for the Vision system specifically, since its so differentİ
+     * "d" is for stardard deviation calculations
+     * "c" is for camera specifics
+     * "r" is for Apriltag rejection
+     * 
      * Every word in a constant starts with a capital letter and acronyms have all letters capitalized.
      */
 public class Constants {
@@ -98,6 +104,27 @@ public class Constants {
     public static final Shooter shooter = new Shooter();
 
     public static boolean blueAlliance = DriverStation.getAlliance().get() == Alliance.Blue;
+
+    public class sVision{
+        //Camera Specifics
+        public static final String[] cCameraNames = {"limelight-tavuk", "limelight-karga", "limelight-ordek"};
+
+        //Pose Estimator
+        public static final double pXYBase = 0.3; //Meters | The base std value for the translation
+        public static final double pRotBase = 0.65; //Degrees | The base std value for the rotation
+
+        public static final double pXYScale = 0.2;  //Meters | How much to increase the std dev by per meter of tag distance
+        public static final double pRotScale = 0.2; //Degrees | How much to increase the std dev by per meter of tag distance
+
+        public static final double pXYMin = 0.15; //The minimum std value for the translation
+        public static final double pXYMax = 1; //The maximum std value for the translation
+        public static final double pRotMin = 0.3; //The minimum std value for the rotation
+        public static final double pRotMax = 1.75; //The maximum std value for the rotation
+
+        //Apriltag Rejection
+        public static final double rMaxTurnSpeed = 30; //RotationsPerMinute
+        public static final double rMaxAmbiguity = 0.9; //Percent (1 is 100%) | The maximum amount of ambiguity that is accepted
+    }
 
     public class sDrivetrain{
         //HubAlign
