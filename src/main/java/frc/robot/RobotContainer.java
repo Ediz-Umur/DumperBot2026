@@ -6,11 +6,16 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -18,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.AlignDrivetrain;
+import frc.robot.commands.DynamicFlywheelWarmup;
 import frc.robot.commands.EmptyHopper;
 import frc.robot.commands.Feed;
 import frc.robot.commands.IntakeMove;
@@ -28,25 +34,38 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class RobotContainer {
+
     boolean isSysID = false;
+    boolean isCompetition = false;
 
-    private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
-
+    private SendableChooser<Command> autoChooser;
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-            .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+            .withDeadband(Constants.sDrivetrain.kMaxSpeed * 0.1).withRotationalDeadband(Constants.sDrivetrain.kMaxAngularRate * 0.1) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
-    private final Telemetry logger = new Telemetry(MaxSpeed);
+    private final Telemetry logger = new Telemetry(Constants.sDrivetrain.kMaxSpeed);
 
     public static final CommandPS5Controller joystick = new CommandPS5Controller(0);
 
     public final CommandSwerveDrivetrain drivetrain = Constants.drivetrain;
 
     public RobotContainer() {
+        NamedCommands.registerCommand("Shoot", new Shoot(Constants.sShooter.kAutoMaxShootTime));         
+        NamedCommands.registerCommand("IntakeNormal", new IntakeMove());
+        NamedCommands.registerCommand("IntakeOscillate", new IntakeOscillate());
+        NamedCommands.registerCommand("RollerStop", new InstantCommand(() -> Constants.intake.RollerStop()));
+        NamedCommands.registerCommand("GyroResetDepot", new InstantCommand(() -> Constants.drivetrain.ResetGyro(-45)));
+        NamedCommands.registerCommand("GyroResetHP", new InstantCommand(() -> Constants.drivetrain.ResetGyro(45)));
+
+        autoChooser = AutoBuilder.buildAutoChooserWithOptionsModifier(
+        (stream) -> isCompetition
+        ? stream.filter(auto -> auto.getName().startsWith("Comp"))
+        : stream);
+
+        SmartDashboard.putData("Auto Chooser", autoChooser);
         configureBindings();
     }
 
@@ -56,11 +75,14 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-joystick.getLeftY() * Constants.sDrivetrain.kMaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-joystick.getLeftX() * Constants.sDrivetrain.kMaxSpeed) // Drive left with negative X (left)
+                    .withRotationalRate(-joystick.getRightX() * Constants.sDrivetrain.kMaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
+
+        //Setting the warmup command as the shooters' default command
+        Constants.shooter.setDefaultCommand(new DynamicFlywheelWarmup());
 
         //Turns on the SysID routines for the drivetrain (NOTE: THIS IS JUST FOR TESTING, DELETE AFTER ITS DONE) //TODO
         if(isSysID){

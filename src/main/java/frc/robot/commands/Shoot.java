@@ -14,7 +14,7 @@ public class Shoot extends Command{
     public Shooter shooter = Constants.shooter;
     public Indexer indexer = Constants.indexer;
 
-    Translation2d TargetTranslation;
+    static Translation2d TargetTranslation;
     double TargetRPS;
     double TargetAngle;
     double Distance;
@@ -29,7 +29,7 @@ public class Shoot extends Command{
         addRequirements(shooter, indexer);
     }
     
-    public double DistanceToRPS(double distance, double angle){
+    public static double DistanceToRPS(double distance, double angle){
         //Meters --> RotationPerSecond
 
         double height = Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight;
@@ -38,7 +38,7 @@ public class Shoot extends Command{
         return(Units.radiansPerSecondToRotationsPerMinute(Velocity / Constants.sShooter.kFlywheelRadius) * Constants.sShooter.kFlywheelMult) / 60;
     }
 
-    public double DistanceToAngle(double distance){
+    public static double DistanceToAngle(double distance){
         //Meters --> Degrees
         
         double S = Math.toRadians(Constants.sShooter.kIdealAngle);
@@ -48,7 +48,7 @@ public class Shoot extends Command{
         return(Angle);
     }
 
-    public double getDistance(){
+    public static double getDistance(){
         //Meters
         //Get the Hub Translation
         if (Constants.blueAlliance){
@@ -120,5 +120,13 @@ public class Shoot extends Command{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void end(boolean isInterrupted){
+        shooter.FlywheelStop();
+        shooter.KickerStop();
+        shooter.HoodMove(Constants.sShooter.kHoodClosedAngle);
+        indexer.IndexerStop();
     }
 }

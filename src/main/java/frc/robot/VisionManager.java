@@ -64,6 +64,12 @@ public class VisionManager {
         return false;
     }
 
+    public static void OdometryInitialize(){
+        for(String camera : Constants.sVision.cCameraNames){
+            LimelightHelpers.SetIMUMode(camera, Constants.sVision.cCameraIMUMode);
+        }
+    }
+
     public static void OdometryCycle(){
         var driveState = Constants.drivetrain.getState();
         double headingDeg = driveState.Pose.getRotation().getDegrees();

@@ -62,4 +62,12 @@ public class Feed extends Command{
         }
         return false;
     }
+
+    @Override
+    public void end(boolean isInterrupted){
+        shooter.FlywheelStop();
+        shooter.KickerStop();
+        shooter.HoodMove(Constants.sShooter.kHoodClosedAngle);
+        indexer.IndexerStop();
+    }
 }

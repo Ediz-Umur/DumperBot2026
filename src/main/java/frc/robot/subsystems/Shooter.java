@@ -185,9 +185,13 @@ public class Shooter extends SubsystemBase {
         return(m_RangeLeft.getIsDetected().asSupplier().get() && m_RangeRight.getIsDetected().asSupplier().get());
     }
 
-    //Stops all motors of the subsystem(except the hood motor)
-    public void MotorStop(){
+    //Stops kicker motor
+    public void KickerStop(){
         m_Kicker.stopMotor();
+    }
+
+    //Stops all flywheel motors
+    public void FlywheelStop(){
         m_LeftShooterLeader.stopMotor();
         m_LeftFollowerShooter.stopMotor();
         m_RightShooterLeader.stopMotor();

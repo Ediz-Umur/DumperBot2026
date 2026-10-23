@@ -1,5 +1,7 @@
 package frc.robot;
 
+import static edu.wpi.first.units.Units.*;
+
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
@@ -108,6 +110,7 @@ public class Constants {
     public class sVision{
         //Camera Specifics
         public static final String[] cCameraNames = {"limelight-tavuk", "limelight-karga", "limelight-ordek"};
+        public static final int cCameraIMUMode = 0;
 
         //Pose Estimator
         public static final double pXYBase = 0.3; //Meters | The base std value for the translation
@@ -127,6 +130,13 @@ public class Constants {
     }
 
     public class sDrivetrain{
+        //General ID
+        public static final int dGyroID = 13;
+
+        //General
+        public static final double kMaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+        public static final double kMaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
+
         //HubAlign
         public static final double tMaxTimer = 0.5; //The maximum amount of time the command can run
         public static final double tCounterAmount = 15; //The number that the counter has to reach to consider the command done
@@ -315,5 +325,8 @@ public class Constants {
         public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoto command
 
         public static final double kHoodDegreeToRotation = 0.1; //RotationPerDegree | How many rotations is 1 degree //TODO
+
+        public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
+        public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
     }
 }
