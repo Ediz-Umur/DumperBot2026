@@ -4,6 +4,10 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -88,9 +92,39 @@ import frc.robot.subsystems.Shooter;
      */
 public class Constants {
 
+    public static final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     public static final Intake intake = new Intake(); 
     public static final Indexer indexer = new Indexer();
     public static final Shooter shooter = new Shooter();
+
+    public static boolean blueAlliance = DriverStation.getAlliance().get() == Alliance.Blue;
+
+    public class sDrivetrain{
+        //HubAlign
+        public static final double tMaxTimer = 0.5; //The maximum amount of time the command can run
+        public static final double tCounterAmount = 15; //The number that the counter has to reach to consider the command done
+        public static final double tDegreeTolerance = 1; //Degrees | The ± degree tolerance given to the drivetrain angle
+
+        public static final double pHubAlignP = 0.175;
+        public static final double pHubAlignI = 0.05;
+        public static final double pHubAlignD = 0.01;
+
+        //XLock
+        public static final double kXLockDisableLimit = 0.5; //Percent movement (1 is max) | How much the joystick has to go away from the center for XLock to be disabled
+    
+    }
+
+    public class sFieldElement{
+        public static final double kHubHeight = 1.8288;
+
+        public static final Translation2d kBlueHubPosition = new Translation2d(4.625594, 4.034536);
+        public static final Translation2d kRedHubPosition = new Translation2d(11.915394, 4.034536);
+
+        public static final Translation2d kFieldSize = new Translation2d(16.5410134,8.069326);
+        //NOTE!! THIS IS THE BOTTOM TARGET ON THE BLUE ALLIANCE, EVERY OTHER TARGET IS DERIVED FROM THIS
+        //SECOND NOTE!! THIS IS IN FIELD COORDINATE SYSTEM, SO CONSIDER THE ORIGIN AS THE BOTTOM OF THE BLUE ALLIANCE WALL WHEN BLUE IS AT THE LEFT SIDE
+        public static final Translation2d kFeedTarget = new Translation2d(1, 1.5);
+    }
 
     public class sIntake{
         //Device IDs   
@@ -156,7 +190,7 @@ public class Constants {
         public static final double tIndexerTolerance = 1; //RotationsPerSecond //TODO
 
         //Misc
-        public static final double fIndexerSpeed = 10; //RotationsPerSecond //TODO
+        public static final double kIndexerSpeed = 10; //RotationsPerSecond //TODO
     }
     public class sShooter{
         //Devide IDs
@@ -237,6 +271,7 @@ public class Constants {
         
         public static final double kHoodMinAngle = 0; //Degrees //TODO
         public static final double kHoodMaxAngle = 180; //Degrees //TODO
+        public static final double kHoodFeedAngle = 90;//Degrees //TODO
         public static final double kHoodClosedAngle = 10; //Degrees | The angle of the hood when it is not in use //TODO
 
         public static final double kKickerSpeed = 20; //RotationsPerSecond //TODO
@@ -246,6 +281,11 @@ public class Constants {
         
         public static final double kFlywheelHeight = 0.1; //Meters //TODO
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0); //TODO
+        public static final double kIdealAngle = -30; //Degrees | The ideal angle for the ball to go into the hub, with respect to the ground
+
+        public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
+        public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
+        public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoto command
 
         public static final double kHoodDegreeToRotation = 0.1; //RotationPerDegree | How many rotations is 1 degree //TODO
     }

@@ -7,9 +7,10 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Indexer {
+public class Indexer extends SubsystemBase{
     //Object Creations
     private TalonFX m_IndexerMotor = new TalonFX(Constants.sIndexer.dIndexerMotorID);
     private TalonFXConfiguration m_IndexerConfiguration = new TalonFXConfiguration();
@@ -51,7 +52,7 @@ public class Indexer {
     }
 
     //Stops all motors of the subsystem
-    public void MotorStop(){
+    public void IndexerStop(){
         m_IndexerMotor.stopMotor();
     }
 }

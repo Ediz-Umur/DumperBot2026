@@ -144,15 +144,15 @@ public class Shooter extends SubsystemBase {
         m_Hood.setControl(m_HoodMotionMagic);
     }
 
-    //Figure out which one is better and delete the other one //TODO
+    /*
     public void FlywheelSysIDMove(double volts){
         m_LeftShooterLeader.setControl(new VoltageOut(volts));
         m_LeftFollowerShooter.setControl(new Follower(Constants.sShooter.dLeftShooterLeaderID, MotorAlignmentValue.Aligned));
         m_RightShooterLeader.setControl(new VoltageOut(volts));
         m_RightFollowerShooter.setControl(new Follower(Constants.sShooter.dRightShooterLeaderID, MotorAlignmentValue.Aligned));
-    }
+    } */
 
-    public void FlywheelMovePID(double RPS){
+    public void FlywheelMove(double RPS){
         MotionMagicVelocityTorqueCurrentFOC m_FlywheelMotionMagic = new MotionMagicVelocityTorqueCurrentFOC(RPS);
         m_LeftShooterLeader.setControl(m_FlywheelMotionMagic);
         m_LeftFollowerShooter.setControl(new Follower(Constants.sShooter.dLeftShooterLeaderID, MotorAlignmentValue.Aligned));
