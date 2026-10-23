@@ -4,9 +4,11 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
 import edu.wpi.first.math.geometry.Translation2d;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
 
-public class Constants {
-    /*
+/*
      * Rules & Syntax for the Constants Folder
      *
      * RULES
@@ -84,6 +86,12 @@ public class Constants {
      * 
      * Every word in a constant starts with a capital letter and acronyms have all letters capitalized.
      */
+public class Constants {
+
+    public static final Intake intake = new Intake(); 
+    public static final Indexer indexer = new Indexer();
+    public static final Shooter shooter = new Shooter();
+
     public class sIntake{
         //Device IDs   
         public static final int dRollerLeaderID = 20;
