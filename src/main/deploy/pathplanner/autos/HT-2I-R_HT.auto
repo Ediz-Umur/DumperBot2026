@@ -1,0 +1,43 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HT-Intake1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HT-ReturnHT"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HT-Intake2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HT-ReturnHT"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

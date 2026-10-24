@@ -1,0 +1,121 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 2.422236842105263,
+        "y": 4.035
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.5122280701754383,
+        "y": 3.9395263157894744
+      },
+      "isLocked": false,
+      "linkedName": "HubApproach"
+    },
+    {
+      "anchor": {
+        "x": 4.355578947366045,
+        "y": 7.49592105262855
+      },
+      "prevControl": {
+        "x": 2.2233333333309573,
+        "y": 7.742561403505742
+      },
+      "nextControl": {
+        "x": 5.248814484764989,
+        "y": 7.392599031511508
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.681245614035086,
+        "y": 6.843517543859649
+      },
+      "prevControl": {
+        "x": 7.1309540878933095,
+        "y": 7.635684456120223
+      },
+      "nextControl": {
+        "x": 8.231537140176862,
+        "y": 6.0513506315990755
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.975622807017542,
+        "y": 3.4780701754385976
+      },
+      "prevControl": {
+        "x": 7.911973684210526,
+        "y": 4.385070175438597
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "D-Intake"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0129509713228502,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.9703977798334869,
+      "rotationDegrees": -80.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "Intake",
+      "minWaypointRelativePos": 1.9854545454545494,
+      "maxWaypointRelativePos": 3.0,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeMove",
+      "waypointRelativePos": 1.586493506493512,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeMove"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -80.0
+  },
+  "reversed": false,
+  "folder": "Depot Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

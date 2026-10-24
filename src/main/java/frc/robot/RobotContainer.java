@@ -53,12 +53,15 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = Constants.drivetrain;
 
     public RobotContainer() {
-        NamedCommands.registerCommand("Shoot", new Shoot(Constants.sShooter.kAutoMaxShootTime));         
-        NamedCommands.registerCommand("IntakeNormal", new IntakeMove());
+        NamedCommands.registerCommand("Shoot", Commands.parallel(
+                     /* The oscillating command  */     Commands.sequence(
+                    /* Wait for the set wait time */        Commands.waitSeconds(Constants.sIntake.kOscillateWaitTime), 
+                    /* Then start the oscillation */        new IntakeOscillate()),
+                                                        new Shoot(Constants.sShooter.kAutoMaxShootTime)));   
+
+        NamedCommands.registerCommand("IntakeMove", new IntakeMove());
         NamedCommands.registerCommand("IntakeOscillate", new IntakeOscillate());
         NamedCommands.registerCommand("RollerStop", new InstantCommand(() -> Constants.intake.RollerStop()));
-        NamedCommands.registerCommand("GyroResetDepot", new InstantCommand(() -> Constants.drivetrain.ResetGyro(-45)));
-        NamedCommands.registerCommand("GyroResetHP", new InstantCommand(() -> Constants.drivetrain.ResetGyro(45)));
 
         autoChooser = AutoBuilder.buildAutoChooserWithOptionsModifier(
         (stream) -> isCompetition

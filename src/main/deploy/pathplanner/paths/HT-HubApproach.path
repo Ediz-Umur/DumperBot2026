@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.042815789473684,
+        "y": 0.606
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.5055637593094677,
+        "y": 0.8587805508157197
+      },
+      "isLocked": false,
+      "linkedName": "H-ReturnHT"
+    },
+    {
+      "anchor": {
+        "x": 2.422236842105263,
+        "y": 4.035
+      },
+      "prevControl": {
+        "x": 2.2189997586685046,
+        "y": 3.8894160451281805
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "HubApproach"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "HP Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 65.51594476879302
+  },
+  "useDefaultConstraints": true
+}

@@ -1,0 +1,101 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.639526315789473,
+        "y": 7.432271929824561
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.639526315789473,
+        "y": 7.432271929824561
+      },
+      "isLocked": false,
+      "linkedName": "DT-Start"
+    },
+    {
+      "anchor": {
+        "x": 7.848324561403508,
+        "y": 7.011
+      },
+      "prevControl": {
+        "x": 7.598549052500649,
+        "y": 7.278616616681633
+      },
+      "nextControl": {
+        "x": 8.07109649122807,
+        "y": 6.7723157894736845
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 7.975622807017542,
+        "y": 3.4780701754385976
+      },
+      "prevControl": {
+        "x": 7.986030443195586,
+        "y": 3.7278534437116857
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "D-Intake"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.9602220166512498,
+      "rotationDegrees": -80.0
+    }
+  ],
+  "constraintZones": [
+    {
+      "name": "IntakingSpeed",
+      "minWaypointRelativePos": 1.0077922077922,
+      "maxWaypointRelativePos": 2.0,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 3.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
+    }
+  ],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "IntakeMove",
+      "waypointRelativePos": 0.4966233766233752,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "IntakeMove"
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -80.0
+  },
+  "reversed": false,
+  "folder": "Depot Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "useDefaultConstraints": true
+}

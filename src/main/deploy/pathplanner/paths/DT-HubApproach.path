@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.042815789473684,
+        "y": 7.464096491228071
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 3.505565419680507,
+        "y": 7.211318979963152
+      },
+      "isLocked": false,
+      "linkedName": "DT-ReturnDT"
+    },
+    {
+      "anchor": {
+        "x": 2.422236842105263,
+        "y": 4.035
+      },
+      "prevControl": {
+        "x": 2.219000826698102,
+        "y": 4.180585445843395
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "HubApproach"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
+  "reversed": false,
+  "folder": "Depot Trench",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -73.25209694160003
+  },
+  "useDefaultConstraints": true
+}

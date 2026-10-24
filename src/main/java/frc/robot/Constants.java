@@ -202,6 +202,8 @@ public class Constants {
         public static final double kPivotClosedPosition = 0.1; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
         public static final double kRollerSpeed = 10; //RotationsPerSecond //TODO
 
+        public static final double kOscillateWaitTime = 1; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
+
     }
     public class sIndexer{
         //Devide IDs
