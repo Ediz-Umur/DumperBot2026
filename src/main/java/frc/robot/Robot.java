@@ -25,9 +25,12 @@ public class Robot extends TimedRobot {
         .withJoystickReplay();
 
     public Robot() {
+        //Resets the intake encoder
+        Constants.intake.PivotEncoderReset();
+
         m_robotContainer = new RobotContainer();
 
-        Constants.drivetrain.configureAutoBuilder();
+        //Constants.drivetrain.configureAutoBuilder();
 
         SmartDashboard.putData("Field", field);      
         SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
@@ -38,7 +41,7 @@ public class Robot extends TimedRobot {
         m_timeAndJoystickReplay.update();
         CommandScheduler.getInstance().run(); 
 
-        VisionManager.OdometryCycle();
+        //VisionManager.OdometryCycle();
     }
 
     @Override

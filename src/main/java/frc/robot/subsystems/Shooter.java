@@ -4,6 +4,7 @@ import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicExpoTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.MotionMagicVelocityTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -140,7 +141,7 @@ public class Shooter extends SubsystemBase {
 
     //Making the hood motor move
     public void HoodMove(double Degrees){
-        MotionMagicExpoTorqueCurrentFOC m_HoodMotionMagic = new MotionMagicExpoTorqueCurrentFOC(Degrees * Constants.sShooter.kHoodDegreeToRotation);
+        PositionTorqueCurrentFOC m_HoodMotionMagic = new PositionTorqueCurrentFOC(Degrees * Constants.sShooter.kHoodDegreeToRotation);
         m_Hood.setControl(m_HoodMotionMagic);
     }
 
@@ -153,7 +154,7 @@ public class Shooter extends SubsystemBase {
     } */
 
     public void FlywheelMove(double RPS){
-        MotionMagicVelocityTorqueCurrentFOC m_FlywheelMotionMagic = new MotionMagicVelocityTorqueCurrentFOC(RPS);
+        VelocityVoltage m_FlywheelMotionMagic = new VelocityVoltage(RPS);
         m_LeftShooterLeader.setControl(m_FlywheelMotionMagic);
         m_LeftFollowerShooter.setControl(new Follower(Constants.sShooter.dLeftShooterLeaderID, MotorAlignmentValue.Aligned));
         m_RightShooterLeader.setControl(m_FlywheelMotionMagic);

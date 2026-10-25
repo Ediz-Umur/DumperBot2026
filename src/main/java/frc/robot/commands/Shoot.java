@@ -74,7 +74,7 @@ public class Shoot extends Command{
         //Setting flywheel, hood and kicker to the desired values
         shooter.FlywheelMove(TargetRPS);
         shooter.HoodMove(TargetAngle);
-        shooter.KickerMove(Constants.sShooter.kKickerSpeed);
+        shooter.KickerMove(TargetRPS);
 
         //Putting angle and speed onto the dashboard (ONLY FOR DEBUGGING, REMOVE AFTER TESTS) //TODO
         SmartDashboard.putNumber("Target RPS", TargetRPS);
@@ -91,7 +91,7 @@ public class Shoot extends Command{
         if(
         Math.abs(shooter.GetFlywheelVelocity()- TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
         Math.abs(shooter.GetHoodAngle() - TargetAngle) < Constants.sShooter.tHoodTolerance &&
-        Math.abs(shooter.GetKickerVelocity() - Constants.sShooter.kKickerSpeed) < Constants.sShooter.tKickerTolerance &&
+        Math.abs(shooter.GetKickerVelocity() - TargetRPS) < Constants.sShooter.tKickerTolerance &&
         !isIndexerStarted
         ){
             indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);

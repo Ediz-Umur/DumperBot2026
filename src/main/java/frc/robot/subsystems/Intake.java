@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -80,7 +81,7 @@ public class Intake extends SubsystemBase{
 
     //Moving the pivot based off of the amount of rotations the motor will do.
     public void GoToPosition(double rotations){
-        MotionMagicExpoVoltage m_PivotMotionMagic = new MotionMagicExpoVoltage(rotations).withEnableFOC(true);
+        PositionVoltage m_PivotMotionMagic = new PositionVoltage(rotations).withEnableFOC(true);
         m_PivotMotor.setControl(m_PivotMotionMagic);
     }
     
@@ -111,5 +112,9 @@ public class Intake extends SubsystemBase{
     public void RollerStop(){
         m_RollerLeaderMotor.stopMotor();
         m_RollerFollowerMotor.stopMotor();
+    }
+
+    public void PivotEncoderReset(){
+        m_PivotMotor.setPosition(0);
     }
 }

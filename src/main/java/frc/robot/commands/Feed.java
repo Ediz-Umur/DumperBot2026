@@ -26,7 +26,7 @@ public class Feed extends Command{
         //Setting flywheel, hood and kicker to the desired values
         shooter.FlywheelMove(Constants.sShooter.kFlywheelFeedSpeed);
         shooter.HoodMove(Constants.sShooter.kHoodFeedAngle);
-        shooter.KickerMove(Constants.sShooter.kKickerSpeed);
+        shooter.KickerMove(Constants.sShooter.kFlywheelFeedSpeed);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class Feed extends Command{
         if(
         Math.abs(shooter.GetFlywheelVelocity() - Constants.sShooter.kFlywheelFeedSpeed) < Constants.sShooter.tFlywheelTolerance &&
         Math.abs(shooter.GetHoodAngle() - Constants.sShooter.kHoodFeedAngle) < Constants.sShooter.tHoodTolerance &&
-        Math.abs(shooter.GetKickerVelocity() - Constants.sShooter.kKickerSpeed) < Constants.sShooter.tKickerTolerance &&
+        Math.abs(shooter.GetKickerVelocity() - Constants.sShooter.kFlywheelFeedSpeed) < Constants.sShooter.tKickerTolerance &&
         !isIndexerStarted
         ){
             indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);

@@ -38,7 +38,7 @@ public class RobotContainer {
     boolean isSysID = false;
     boolean isCompetition = false;
 
-    private SendableChooser<Command> autoChooser;
+    private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(Constants.sDrivetrain.kMaxSpeed * 0.1).withRotationalDeadband(Constants.sDrivetrain.kMaxAngularRate * 0.1) // Add a 10% deadband
@@ -62,11 +62,6 @@ public class RobotContainer {
         NamedCommands.registerCommand("IntakeMove", new IntakeMove());
         NamedCommands.registerCommand("IntakeOscillate", new IntakeOscillate());
         NamedCommands.registerCommand("RollerStop", new InstantCommand(() -> Constants.intake.RollerStop()));
-
-        autoChooser = AutoBuilder.buildAutoChooserWithOptionsModifier(
-        (stream) -> isCompetition
-        ? stream.filter(auto -> auto.getName().startsWith("Comp"))
-        : stream);
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
         configureBindings();

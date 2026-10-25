@@ -173,7 +173,7 @@ public class Constants {
         public static final double pRollerS = 0; //TODO
         public static final double pRollerA = 0; //TODO
         public static final double pRollerV = 0; //TODO
-        public static final double pRollerP = 25; //TODO
+        public static final double pRollerP = 50; //TODO
         public static final double pRollerI = 0; //TODO
         public static final double pRollerD = 0; //TODO
 
@@ -181,7 +181,7 @@ public class Constants {
         public static final double pPivotA = 0; //TODO
         public static final double pPivotV = 0; //TODO
         public static final double pPivotG = 0; //TODO
-        public static final double pPivotP = 25; //TODO
+        public static final double pPivotP = 5; //TODO
         public static final double pPivotI = 0; //TODO
         public static final double pPivotD = 0; //TODO
 
@@ -200,7 +200,7 @@ public class Constants {
         //Misc
         public static final double kPivotOpenPosition = 0.0; //Rotations | The encoder rotation value when the intake is OPEN
         public static final double kPivotClosedPosition = 0.1; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
-        public static final double kRollerSpeed = 10; //RotationsPerSecond //TODO
+        public static final double kRollerSpeed = 50; //RotationsPerSecond //TODO
 
         public static final double kOscillateWaitTime = 1; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
 
@@ -229,7 +229,7 @@ public class Constants {
         public static final double tIndexerTolerance = 1; //RotationsPerSecond //TODO
 
         //Misc
-        public static final double kIndexerSpeed = 10; //RotationsPerSecond //TODO
+        public static final double kIndexerSpeed = 40; //RotationsPerSecond //TODO
     }
     public class sShooter{
         //Devide IDs
@@ -253,12 +253,12 @@ public class Constants {
         public static final double rMinSignalStrength = 2500; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
 
         //PID Gains
-        public static final double cFlywheelS = 0; //TODO
-        public static final double cFlywheelA = 0; //TODO
-        public static final double cFlywheelV = 0; //TODO
-        public static final double cFlywheelP = 25; //TODO
-        public static final double cFlywheelI = 0; //TODO
-        public static final double cFlywheelD = 0; //TODO
+        public static final double cFlywheelS = 0.0235;
+        public static final double cFlywheelA = 0.008;
+        public static final double cFlywheelV = 0.185;
+        public static final double cFlywheelP = 6.7;
+        public static final double cFlywheelI = 0;
+        public static final double cFlywheelD = 0;
 
         public static final double cKickerkS = 0; //TODO
         public static final double cKickerkA = 0; //TODO
@@ -288,11 +288,11 @@ public class Constants {
 
         //Motor Configs
         public static final double cFlywheelGearRatio = 0.6667;
-        public static final double cHoodGearRatioMtE = 0.5; //TODO
-        public static final double cHoodGearRatioEtMc = 1; //TODO
+        public static final double cHoodGearRatioMtE = 0.1665; //TODO
+        public static final double cHoodGearRatioEtMc = 2; //TODO
         public static final double cKickerGearRatio = 0.6667; 
 
-        public static final double cFlywheelCurrentLimit = 50; //TODO
+        public static final double cFlywheelCurrentLimit = 85; //TODO
         public static final double cHoodCurrentLimit = 50; //TODO
         public static final double cKickerCurrentLimit = 50; //TODO
 
@@ -313,8 +313,6 @@ public class Constants {
         public static final double kHoodFeedAngle = 90;//Degrees //TODO
         public static final double kHoodClosedAngle = 10; //Degrees | The angle of the hood when it is not in use //TODO
 
-        public static final double kKickerSpeed = 20; //RotationsPerSecond //TODO
-
         public static final double kFlywheelMult = 1.76; //The multiplier on the distance calculation
         public static final double kFlywheelRadius = 0.04; //Meters //TODO
         
@@ -326,7 +324,7 @@ public class Constants {
         public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
         public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoto command
 
-        public static final double kHoodDegreeToRotation = 0.1; //RotationPerDegree | How many rotations is 1 degree //TODO
+        public static final double kHoodDegreeToRotation = 0.0275; //RotationPerDegree | How many rotations is 1 degree //TODO
 
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
