@@ -5,6 +5,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants;
 import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Shooter;
@@ -35,7 +36,7 @@ public class Shoot extends Command{
         double height = Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight;
         
         double Velocity = Math.sqrt((-9.8*Math.pow(distance, 2)*(1 + Math.pow(Math.tan(Math.toRadians(angle)), 2))) / ((2 * height) - 2 * distance * Math.tan(Math.toRadians(angle))));
-        return(Units.radiansPerSecondToRotationsPerMinute(Velocity / Constants.sShooter.kFlywheelRadius) * Constants.sShooter.kFlywheelMult) / 60;
+        return((Units.radiansPerSecondToRotationsPerMinute(Velocity / Constants.sShooter.kFlywheelRadius) * Constants.sShooter.kFlywheelMult)) / 60;
     }
 
     public static double DistanceToAngle(double distance){
@@ -61,6 +62,7 @@ public class Shoot extends Command{
         Translation2d ShooterTranslation = Constants.drivetrain.getState().Pose.getTranslation().minus(Constants.sShooter.kFlywheelOffsetFromCenter);
 
         //Return the distance between the translations
+        System.out.println(ShooterTranslation.getDistance(TargetTranslation));
         return(ShooterTranslation.getDistance(TargetTranslation));
     }
 
@@ -71,10 +73,12 @@ public class Shoot extends Command{
         TargetAngle = DistanceToAngle(Distance);
         TargetRPS = DistanceToRPS(Distance, TargetAngle);
 
+        TargetAngle = (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle;
+
         //Setting flywheel, hood and kicker to the desired values
         shooter.FlywheelMove(TargetRPS);
         shooter.HoodMove(TargetAngle);
-        shooter.KickerMove(TargetRPS);
+        shooter.KickerMove(Constants.sShooter.kKickerSpeed);
 
         //Putting angle and speed onto the dashboard (ONLY FOR DEBUGGING, REMOVE AFTER TESTS) //TODO
         SmartDashboard.putNumber("Target RPS", TargetRPS);
@@ -91,7 +95,7 @@ public class Shoot extends Command{
         if(
         Math.abs(shooter.GetFlywheelVelocity()- TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
         Math.abs(shooter.GetHoodAngle() - TargetAngle) < Constants.sShooter.tHoodTolerance &&
-        Math.abs(shooter.GetKickerVelocity() - TargetRPS) < Constants.sShooter.tKickerTolerance &&
+        Math.abs(shooter.GetKickerVelocity() - Constants.sShooter.kKickerSpeed) < Constants.sShooter.tKickerTolerance &&
         !isIndexerStarted
         ){
             indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);
@@ -118,6 +122,8 @@ public class Shoot extends Command{
         }
         if(TargetAngle > Constants.sShooter.kHoodMaxAngle){
             return true;
+        } else if(TargetAngle < 0){
+            return true;
         }
         return false;
     }
@@ -128,5 +134,6 @@ public class Shoot extends Command{
         shooter.KickerStop();
         shooter.HoodMove(Constants.sShooter.kHoodClosedAngle);
         indexer.IndexerStop();
+        CommandScheduler.getInstance().cancel(new IntakeOscillate());
     }
 }

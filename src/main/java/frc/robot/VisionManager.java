@@ -50,7 +50,11 @@ public class VisionManager {
         }
 
         //If the pose estimate doesnt exist, reject measurement
-        if(poseEstimate.equals(null)){
+        if(poseEstimate == null || poseEstimate.equals(new PoseEstimate())){
+            return true;
+        }
+
+        if(poseEstimate.tagCount == 0){
             return true;
         }
 
@@ -82,8 +86,8 @@ public class VisionManager {
                 Constants.drivetrain.addVisionMeasurement(Measurement.pose, 
                                                           Measurement.timestampSeconds - ((Measurement.latency + LimelightHelpers.getLatency_Capture(camera)) / 1000), 
                                                           CalculateXYSTDDev(Measurement));
-                                                  SmartDashboard.putNumber(camera + " X SYD", CalculateXYSTDDev(Measurement).get(0, 0));
-                                                  SmartDashboard.putNumber(camera +" Y STD", CalculateXYSTDDev(Measurement).get(1, 0));
+            SmartDashboard.putNumber(camera + " X SYD", CalculateXYSTDDev(Measurement).get(0, 0));
+            SmartDashboard.putNumber(camera +" Y STD", CalculateXYSTDDev(Measurement).get(1, 0));
       }
       PoseEstimate MeasurementRotation = LimelightHelpers.getBotPoseEstimate_wpiBlue(camera);
       SmartDashboard.putBoolean(camera +" Rotational Rejection: ", !isTagRejected(MeasurementRotation));
@@ -91,7 +95,7 @@ public class VisionManager {
         Constants.drivetrain.addVisionMeasurement(MeasurementRotation.pose,
                                                   MeasurementRotation.timestampSeconds - ((MeasurementRotation.latency + LimelightHelpers.getLatency_Capture(camera)) / 1000), 
                                                   CalculateRotSTDDev(MeasurementRotation));
-                                                  SmartDashboard.putNumber(camera +" Rot STD", CalculateRotSTDDev(MeasurementRotation).get(2, 0));
+            SmartDashboard.putNumber(camera +" Rot STD", CalculateRotSTDDev(MeasurementRotation).get(2, 0));
       }
 
         }

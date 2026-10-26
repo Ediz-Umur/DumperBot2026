@@ -81,7 +81,7 @@ public class RobotContainer {
         );
 
         //Setting the warmup command as the shooters' default command
-        Constants.shooter.setDefaultCommand(new DynamicFlywheelWarmup());
+        //Constants.shooter.setDefaultCommand(new DynamicFlywheelWarmup());
 
         //Turns on the SysID routines for the drivetrain (NOTE: THIS IS JUST FOR TESTING, DELETE AFTER ITS DONE) //TODO
         if(isSysID){
@@ -99,15 +99,13 @@ public class RobotContainer {
 
             joystick.R1().toggleOnTrue(new EmptyHopper());
             
-            joystick.R2().onTrue(Commands.parallel(
-                Commands.sequence(Commands.waitSeconds(1), new IntakeOscillate()), //Start the oscillation after the selected time 
-                    Commands.parallel( //During that,
+            joystick.R2().toggleOnTrue( 
+                        Commands.parallel( //During that,
                             new Shoot(Constants.sShooter.kTeleopMaxShootTime), //Start the shoot command and
                             new AlignDrivetrain("hub").andThen(new XLock()) //Align the robot to the hub and XLock 
                             .until(() -> //Until 
                             //The joystick has moved enough away from the center position
                             Math.sqrt( Math.pow(joystick.getLeftX(), 2) + Math.pow(joystick.getLeftY(), 2)) > Constants.sDrivetrain.kXLockDisableLimit)
-                        )
                     )
                 );
 
@@ -124,10 +122,9 @@ public class RobotContainer {
             joystick.options().onTrue(new InstantCommand(() -> Constants.drivetrain.resetRotation(new Rotation2d(0))));
 
             joystick.povUp().onTrue(new IntakeMove("zero"));
-        }
 
-        // Reset the field-centric heading on left bumper press.
-        joystick.options().onTrue(drivetrain.runOnce(drivetrain::seedFieldCentric));
+            joystick.povDown().onTrue(new AlignDrivetrain("hub"));
+        }
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }

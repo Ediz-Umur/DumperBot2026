@@ -13,13 +13,14 @@ public class DynamicFlywheelWarmup extends Command{
     }
 
     @Override
-    public void execute(){
-        double distance = Shoot.getDistance();
+    public void initialize(){
+        /*double distance = Shoot.getDistance();
         if (distance <= Constants.sShooter.kWarmupMaxDistance){
             double RPS = Shoot.DistanceToRPS(distance, Shoot.DistanceToAngle(distance)) * Constants.sShooter.kWarmupScale;
             shooter.FlywheelMove(RPS);
         } else {
             shooter.FlywheelStop();
-        }
+        }*/
+            shooter.FlywheelMove(13);
     }
 }

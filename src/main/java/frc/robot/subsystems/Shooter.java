@@ -73,7 +73,7 @@ public class Shooter extends SubsystemBase {
         m_EncoderConfigs.MagnetSensor.SensorDirection = Constants.sShooter.fSensorDirection;
         
         m_HoodConfiguration.Feedback.FeedbackRemoteSensorID = Constants.sShooter.dHoodEncoder;
-        m_HoodConfiguration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RemoteCANcoder;
+        m_HoodConfiguration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RotorSensor;
 
         //CANrange Configuration
         m_RangeConfiguration.ProximityParams.MinSignalStrengthForValidMeasurement = Constants.sShooter.rMinSignalStrength;
@@ -203,5 +203,9 @@ public class Shooter extends SubsystemBase {
     //Stops only the hood motor
     public void HoodStop(){
         m_Hood.stopMotor();
+    }
+
+    public void HoodReset(){
+        m_Hood.setPosition(0);
     }
 }

@@ -65,7 +65,7 @@ import frc.robot.subsystems.Shooter;
      * GearRatio
      * 
      * The ratio of movement between the motor and mechanism, motor and encoder, or encoder and mechanism
-     * Simply, the number is how many rotations the mechanism / encoder will do for 1 rotation of motor / encoder, dependant on context.
+     * Simply, it is the number of times the motor / encoder have to rotate for the encoder / mechanism to fully rotate once. Numbers higher than 1 is a reduction, smaller is a step-up
      * If there is no encoder, the GR is always Motor --> Mechanism and the value will simple say (___GearRatio)
      * If there is an encoder, there are two GRs: Motor --> Encoder (___GearRatioMtE) and Encoder --> Mechanism (___GearRatioEtMc)
      * 
@@ -142,8 +142,8 @@ public class Constants {
         public static final double tCounterAmount = 15; //The number that the counter has to reach to consider the command done
         public static final double tDegreeTolerance = 1; //Degrees | The ± degree tolerance given to the drivetrain angle
 
-        public static final double pHubAlignP = 0.175;
-        public static final double pHubAlignI = 0.05;
+        public static final double pHubAlignP = 0.150;
+        public static final double pHubAlignI = 0.0;
         public static final double pHubAlignD = 0.01;
 
         //XLock
@@ -186,7 +186,7 @@ public class Constants {
         public static final double pPivotD = 0;
 
         //Motor Configs
-        public static final double cRollerGearRatio = 0.6667;
+        public static final double cRollerGearRatio = 1.5;
         public static final double cPivotGearRatio = 0.111;
         
         public static final int cRollerCurrentLimit = 50;
@@ -200,9 +200,9 @@ public class Constants {
         //Misc
         public static final double kPivotOpenPosition = 260; //Rotations | The encoder rotation value when the intake is OPEN
         public static final double kPivotClosedPosition = 35; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
-        public static final double kRollerSpeed = 50; //RotationsPerSecond
+        public static final double kRollerSpeed = 65; //RotationsPerSecond
 
-        public static final double kOscillateWaitTime = 1; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
+        public static final double kOscillateWaitTime = 1.5; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
 
     }
     public class sIndexer{
@@ -222,14 +222,14 @@ public class Constants {
         public static final double mmIndexerJerk = 1000; //TODO
 
         //Motor Configs
-        public static final double cIndexerGearRatio = 0.6667;
+        public static final double cIndexerGearRatio = 1.5;
         public static final int cIndexerCurrentLimit = 50; //TODO
 
         //Tolerances
         public static final double tIndexerTolerance = 1; //RotationsPerSecond //TODO
 
         //Misc
-        public static final double kIndexerSpeed = 40; //RotationsPerSecond //TODO
+        public static final double kIndexerSpeed = 70; //RotationsPerSecond //TODO
     }
     public class sShooter{
         //Devide IDs
@@ -287,10 +287,10 @@ public class Constants {
         public static final double mmHoodkV = 0.01; //TODO
 
         //Motor Configs
-        public static final double cFlywheelGearRatio = 0.6667;
-        public static final double cHoodGearRatioMtE = 0.1665;
-        public static final double cHoodGearRatioEtMc = 2;
-        public static final double cKickerGearRatio = 0.6667; 
+        public static final double cFlywheelGearRatio = 1.5;
+        public static final double cHoodGearRatioMtE = 6.006;
+        public static final double cHoodGearRatioEtMc = 0.5;
+        public static final double cKickerGearRatio = 1.5; 
 
         public static final double cFlywheelCurrentLimit = 85;
         public static final double cHoodCurrentLimit = 50; //TODO
@@ -305,26 +305,28 @@ public class Constants {
         public static final double tKickerTolerance = 5; //RotationsPerSecond //TODO
 
         //Misc
+        public static final double kKickerSpeed = 70; //RotationsPerSecond
+
         public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond //TODO
         public static final double kFlywheelFeedSpeed = 40; //RotationsPerSecond | The speed of the flywheel while feeding
         
-        public static final double kHoodMinAngle = 0; //Degrees //TODO
-        public static final double kHoodMaxAngle = 180; //Degrees //TODO
-        public static final double kHoodFeedAngle = 90;//Degrees //TODO
-        public static final double kHoodClosedAngle = 10; //Degrees | The angle of the hood when it is not in use //TODO
+        public static final double kHoodMinAngle = 10; //Degrees
+        public static final double kHoodMaxAngle = 30; //Degrees
+        public static final double kHoodFeedAngle = 25;//Degrees
+        public static final double kHoodClosedAngle = 5; //Degrees | The angle of the hood when it is not in use //TODO
 
-        public static final double kFlywheelMult = 1.76; //The multiplier on the distance calculation
+        public static final double kFlywheelMult = 1.25; //The multiplier on the distance calculation
         public static final double kFlywheelRadius = 0.04; //Meters
         
-        public static final double kFlywheelHeight = 0.1; //Meters //TODO
-        public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0); //TODO
-        public static final double kIdealAngle = -30; //Degrees | The ideal angle for the ball to go into the hub, with respect to the ground
+        public static final double kFlywheelHeight = 0.404; //Meters
+        public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0.335);
+        public static final double kIdealAngle = -75; //Degrees | The ideal angle for the ball to go into the hub, with respect to the ground
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
         public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
         public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoto command
 
-        public static final double kHoodDegreeToRotation = 0.0275; //RotationPerDegree | How many rotations is 1 degree //TODO
+        public static final double kHoodDegreeToRotation = 0.302; //RotationPerDegree | How many rotations is 1 degree //TODO
 
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command

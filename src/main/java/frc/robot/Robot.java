@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ctre.phoenix6.HootAutoReplay;
+import com.pathplanner.lib.commands.FollowPathCommand;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,6 +28,10 @@ public class Robot extends TimedRobot {
     public Robot() {
         //Resets the intake encoder
         Constants.intake.PivotEncoderReset();
+        Constants.shooter.HoodReset();
+
+        CommandScheduler.getInstance().schedule(FollowPathCommand.warmupCommand());
+        VisionManager.OdometryInitialize();
 
         m_robotContainer = new RobotContainer();
 
@@ -38,10 +43,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
+        field.setRobotPose(Constants.drivetrain.getState().Pose);
         m_timeAndJoystickReplay.update();
         CommandScheduler.getInstance().run(); 
 
-        //VisionManager.OdometryCycle();
+        VisionManager.OdometryCycle();
     }
 
     @Override

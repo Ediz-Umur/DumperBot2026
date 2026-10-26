@@ -49,14 +49,16 @@ public class AlignDrivetrain extends Command{
 
     @Override
     public void execute(){
+        System.out.println("aligning");
+        System.out.println(counter);
         //Getting the target and current angle
         Translation2d CurrentPosition = Constants.drivetrain.getState().Pose.getTranslation();
         Translation2d TargetVector = CurrentPosition.minus(TargetPosition);
-        double TargetAngle = TargetVector.getAngle().getDegrees() + 180;
+        double TargetAngle = TargetVector.getAngle().getDegrees();
         double Rotation = Constants.drivetrain.getState().Pose.getRotation().getDegrees();
 
         //Moving the drivetrain to the target angle
-        double NextOutput = PID.calculate(Rotation, TargetAngle);
+        double NextOutput = PID.calculate(Rotation + 180, TargetAngle);
         SwerveRequest drive = new SwerveRequest.FieldCentric().withRotationalRate(NextOutput);
         CommandScheduler.getInstance().schedule(Constants.drivetrain.applyRequest(() -> drive)
             .until(() -> counter > Constants.sDrivetrain.tCounterAmount ||
