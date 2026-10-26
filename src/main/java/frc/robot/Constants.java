@@ -170,37 +170,37 @@ public class Constants {
         public static final int dPivotID = 22;
 
         //PID Gains
-        public static final double pRollerS = 0; //TODO
-        public static final double pRollerA = 0; //TODO
-        public static final double pRollerV = 0; //TODO
-        public static final double pRollerP = 50; //TODO
-        public static final double pRollerI = 0; //TODO
-        public static final double pRollerD = 0; //TODO
+        public static final double pRollerS = 0;
+        public static final double pRollerA = 0;
+        public static final double pRollerV = 0;
+        public static final double pRollerP = 50;
+        public static final double pRollerI = 0;
+        public static final double pRollerD = 0;
 
-        public static final double pPivotS = 0; //TODO
-        public static final double pPivotA = 0; //TODO
-        public static final double pPivotV = 0; //TODO
-        public static final double pPivotG = 0; //TODO
-        public static final double pPivotP = 5; //TODO
-        public static final double pPivotI = 0; //TODO
-        public static final double pPivotD = 0; //TODO
+        public static final double pPivotS = 0;
+        public static final double pPivotA = 0;
+        public static final double pPivotV = 0;
+        public static final double pPivotG = 0;
+        public static final double pPivotP = 5;
+        public static final double pPivotI = 0;
+        public static final double pPivotD = 0;
 
         //Motor Configs
         public static final double cRollerGearRatio = 0.6667;
         public static final double cPivotGearRatio = 0.111;
         
-        public static final int cRollerCurrentLimit = 50; //TODO
-        public static final int cPivotCurrentLimit = 50; //TODO
+        public static final int cRollerCurrentLimit = 50;
+        public static final int cPivotCurrentLimit = 50;
 
         //Tolerances
 
-        public static final double tRollerTolerance = 1; //RotationsPerSecond //TODO
-        public static final double tPivotTolerance = 5; //Rotations //TODO
+        public static final double tRollerTolerance = 1; //RotationsPerSecond
+        public static final double tPivotTolerance = 5; //Rotations
 
         //Misc
         public static final double kPivotOpenPosition = 260; //Rotations | The encoder rotation value when the intake is OPEN
         public static final double kPivotClosedPosition = 35; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
-        public static final double kRollerSpeed = 50; //RotationsPerSecond //TODO
+        public static final double kRollerSpeed = 50; //RotationsPerSecond
 
         public static final double kOscillateWaitTime = 1; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
 
@@ -210,12 +210,12 @@ public class Constants {
         public static final int dIndexerMotorID = 30;
 
         //PID
-        public static final double pIndexerS = 0; //TODO
-        public static final double pIndexerA = 0; //TODO
-        public static final double pIndexerV = 0; //TODO
-        public static final double pIndexerP = 25; //TODO
-        public static final double pIndexerI = 0; //TODO
-        public static final double pIndexerD = 0; //TODO
+        public static final double pIndexerS = 0;
+        public static final double pIndexerA = 0;
+        public static final double pIndexerV = 0;
+        public static final double pIndexerP = 25;
+        public static final double pIndexerI = 0;
+        public static final double pIndexerD = 0;
 
         //MotionMagic 
         public static final double mmIndexerAcceleration = 100; //TODO
@@ -233,15 +233,15 @@ public class Constants {
     }
     public class sShooter{
         //Devide IDs
-        public static final int dLeftShooterLeaderID = 40; //TODO
-        public static final int dLeftShooterFollowerID = 41; //TODO 
-        public static final int dRightShooterLeaderID = 42; //TODO
-        public static final int dRightShooterFollowerID = 43; //TODO
-        public static final int dKickerID = 44; //TODO
-        public static final int dHoodID = 45; //TODO  
-        public static final int dHoodEncoder = 46; //TODO
-        public static final int dRangeLeft = 47; //TODO
-        public static final int dRangeRight = 48; //TODO
+        public static final int dLeftShooterLeaderID = 40;
+        public static final int dLeftShooterFollowerID = 41; 
+        public static final int dRightShooterLeaderID = 42;
+        public static final int dRightShooterFollowerID = 43;
+        public static final int dKickerID = 44;
+        public static final int dHoodID = 45;  
+        public static final int dHoodEncoder = 46;
+        public static final int dRangeLeft = 47;
+        public static final int dRangeRight = 48;
 
         //CANCoder Configs
         public static final double fMagnetOffset = 0; //TODO
@@ -260,12 +260,12 @@ public class Constants {
         public static final double cFlywheelI = 0;
         public static final double cFlywheelD = 0;
 
-        public static final double cKickerkS = 0; //TODO
-        public static final double cKickerkA = 0; //TODO
-        public static final double cKickerkV = 0; //TODO
-        public static final double cKickerkP = 25; //TODO
-        public static final double cKickerkI = 0; //TODO
-        public static final double cKickerkD = 0; //TODO
+        public static final double cKickerkS = 0; 
+        public static final double cKickerkA = 0; 
+        public static final double cKickerkV = 0; 
+        public static final double cKickerkP = 25; 
+        public static final double cKickerkI = 0; 
+        public static final double cKickerkD = 0; 
 
         public static final double cHoodG = 0; //TODO
         public static final double cHoodS = 0; //TODO
@@ -288,11 +288,11 @@ public class Constants {
 
         //Motor Configs
         public static final double cFlywheelGearRatio = 0.6667;
-        public static final double cHoodGearRatioMtE = 0.1665; //TODO
-        public static final double cHoodGearRatioEtMc = 2; //TODO
+        public static final double cHoodGearRatioMtE = 0.1665;
+        public static final double cHoodGearRatioEtMc = 2;
         public static final double cKickerGearRatio = 0.6667; 
 
-        public static final double cFlywheelCurrentLimit = 85; //TODO
+        public static final double cFlywheelCurrentLimit = 85;
         public static final double cHoodCurrentLimit = 50; //TODO
         public static final double cKickerCurrentLimit = 50; //TODO
 
@@ -314,7 +314,7 @@ public class Constants {
         public static final double kHoodClosedAngle = 10; //Degrees | The angle of the hood when it is not in use //TODO
 
         public static final double kFlywheelMult = 1.76; //The multiplier on the distance calculation
-        public static final double kFlywheelRadius = 0.04; //Meters //TODO
+        public static final double kFlywheelRadius = 0.04; //Meters
         
         public static final double kFlywheelHeight = 0.1; //Meters //TODO
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0); //TODO

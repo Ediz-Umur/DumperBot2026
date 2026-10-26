@@ -28,6 +28,7 @@ import frc.robot.commands.EmptyHopper;
 import frc.robot.commands.Feed;
 import frc.robot.commands.IntakeMove;
 import frc.robot.commands.IntakeOscillate;
+import frc.robot.commands.RollerToggle;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.XLock;
 import frc.robot.generated.TunerConstants;
@@ -115,7 +116,7 @@ public class RobotContainer {
             //Stopping the roller
             joystick.triangle().onTrue(new InstantCommand(() -> Constants.intake.RollerStop()));
 
-            joystick.cross().onTrue(new InstantCommand(() -> Constants.intake.RollerMove(Constants.sIntake.kRollerSpeed)));
+            joystick.cross().onTrue(new RollerToggle());
 
             joystick.circle().onTrue(new XLock());
 

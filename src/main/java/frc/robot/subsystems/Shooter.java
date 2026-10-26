@@ -73,7 +73,7 @@ public class Shooter extends SubsystemBase {
         m_EncoderConfigs.MagnetSensor.SensorDirection = Constants.sShooter.fSensorDirection;
         
         m_HoodConfiguration.Feedback.FeedbackRemoteSensorID = Constants.sShooter.dHoodEncoder;
-        m_HoodConfiguration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.FusedCANcoder; //TODO
+        m_HoodConfiguration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RemoteCANcoder;
 
         //CANrange Configuration
         m_RangeConfiguration.ProximityParams.MinSignalStrengthForValidMeasurement = Constants.sShooter.rMinSignalStrength;
