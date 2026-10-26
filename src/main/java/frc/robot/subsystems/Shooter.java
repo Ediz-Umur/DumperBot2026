@@ -59,6 +59,7 @@ public class Shooter extends SubsystemBase {
         m_KickerConfiguration.Feedback.SensorToMechanismRatio = Constants.sShooter.cKickerGearRatio;
 
         m_KickerConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+        m_LeftFlywheelConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
         m_Hood.setNeutralMode(NeutralModeValue.Brake);
 
@@ -117,7 +118,7 @@ public class Shooter extends SubsystemBase {
         m_RightFlywheelConfiguration.MotionMagic = m_LeftFlywheelConfiguration.MotionMagic;
         m_RightFlywheelConfiguration.Feedback = m_LeftFlywheelConfiguration.Feedback;
 
-        m_RightFlywheelConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+        m_RightFlywheelConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
         //Applying the configurations
         m_Kicker.getConfigurator().apply(m_KickerConfiguration);

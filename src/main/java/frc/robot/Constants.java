@@ -187,7 +187,7 @@ public class Constants {
 
         //Motor Configs
         public static final double cRollerGearRatio = 0.6667;
-        public static final double cPivotGearRatio = 0.5; //TODO
+        public static final double cPivotGearRatio = 0.111;
         
         public static final int cRollerCurrentLimit = 50; //TODO
         public static final int cPivotCurrentLimit = 50; //TODO
@@ -195,11 +195,11 @@ public class Constants {
         //Tolerances
 
         public static final double tRollerTolerance = 1; //RotationsPerSecond //TODO
-        public static final double tPivotTolerance = 0.05; //Rotations //TODO
+        public static final double tPivotTolerance = 5; //Rotations //TODO
 
         //Misc
-        public static final double kPivotOpenPosition = 0.0; //Rotations | The encoder rotation value when the intake is OPEN
-        public static final double kPivotClosedPosition = 0.1; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
+        public static final double kPivotOpenPosition = 260; //Rotations | The encoder rotation value when the intake is OPEN
+        public static final double kPivotClosedPosition = 35; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
         public static final double kRollerSpeed = 50; //RotationsPerSecond //TODO
 
         public static final double kOscillateWaitTime = 1; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command

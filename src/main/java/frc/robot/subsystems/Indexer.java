@@ -6,6 +6,7 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,6 +21,7 @@ public class Indexer extends SubsystemBase{
     public Indexer(){
         //Motor Configurations
         m_IndexerConfiguration.Feedback.SensorToMechanismRatio = Constants.sIndexer.cIndexerGearRatio;
+        m_IndexerConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
         m_IndexerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sIndexer.cIndexerCurrentLimit));
 

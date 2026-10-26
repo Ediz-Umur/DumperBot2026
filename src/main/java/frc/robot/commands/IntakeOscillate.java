@@ -19,7 +19,7 @@ public class IntakeOscillate extends Command{
             TargetPosition = Constants.sIntake.kPivotOpenPosition;
             intake.RollerMove(Constants.sIntake.kRollerSpeed);
         //Else, set the target to the closed position and stop the roller
-        } else {
+        } else if(Math.abs(intake.GetPivotPosition() - Constants.sIntake.kPivotOpenPosition) < Constants.sIntake.tPivotTolerance){
             TargetPosition = Constants.sIntake.kPivotClosedPosition;
             intake.RollerStop();
         }

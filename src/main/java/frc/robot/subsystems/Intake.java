@@ -40,11 +40,11 @@ public class Intake extends SubsystemBase{
     public Intake(){
         //Motor Configurations
         m_RollerConfiguration.Feedback.SensorToMechanismRatio = Constants.sIntake.cRollerGearRatio;
-        m_RollerConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+        m_RollerConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 
         m_PivotConfiguration.Feedback.SensorToMechanismRatio = Constants.sIntake.cPivotGearRatio;
         m_PivotConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-        m_PivotConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+        m_PivotConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Coast;
 
         m_PivotConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sIntake.cPivotCurrentLimit));
         m_RollerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sIntake.cRollerCurrentLimit));

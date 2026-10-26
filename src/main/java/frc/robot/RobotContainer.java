@@ -110,7 +110,7 @@ public class RobotContainer {
                     )
                 );
 
-            joystick.square().onTrue(new Feed());
+            joystick.square().toggleOnTrue(new Feed());
 
             //Stopping the roller
             joystick.triangle().onTrue(new InstantCommand(() -> Constants.intake.RollerStop()));
@@ -122,6 +122,7 @@ public class RobotContainer {
             //Resetting the Gyro
             joystick.options().onTrue(new InstantCommand(() -> Constants.drivetrain.resetRotation(new Rotation2d(0))));
 
+            joystick.povUp().onTrue(new IntakeMove("zero"));
         }
 
         // Reset the field-centric heading on left bumper press.

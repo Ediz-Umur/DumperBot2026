@@ -11,21 +11,21 @@ public class Feed extends Command{
 
     Shooter shooter = Constants.shooter;
     Indexer indexer = Constants.indexer;
-
-    boolean isIndexerStarted = false;
+    boolean isIndexerStarted;
 
     Timer timer = new Timer();
 
     public Feed(){
+        isIndexerStarted = false;
         addRequirements(shooter, indexer);
     }
 
     @Override
     public void initialize(){
-
+        isIndexerStarted = false;
         //Setting flywheel, hood and kicker to the desired values
         shooter.FlywheelMove(Constants.sShooter.kFlywheelFeedSpeed);
-        shooter.HoodMove(Constants.sShooter.kHoodFeedAngle);
+        //shooter.HoodMove(Constants.sShooter.kHoodFeedAngle);
         shooter.KickerMove(Constants.sShooter.kFlywheelFeedSpeed);
     }
 
@@ -38,29 +38,13 @@ public class Feed extends Command{
         //Checks whether everything is up to speed, and starts the indexer if everything is ready
         if(
         Math.abs(shooter.GetFlywheelVelocity() - Constants.sShooter.kFlywheelFeedSpeed) < Constants.sShooter.tFlywheelTolerance &&
-        Math.abs(shooter.GetHoodAngle() - Constants.sShooter.kHoodFeedAngle) < Constants.sShooter.tHoodTolerance &&
+        (Math.abs(shooter.GetHoodAngle() - Constants.sShooter.kHoodFeedAngle) < Constants.sShooter.tHoodTolerance || true) &&
         Math.abs(shooter.GetKickerVelocity() - Constants.sShooter.kFlywheelFeedSpeed) < Constants.sShooter.tKickerTolerance &&
         !isIndexerStarted
         ){
             indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);
             isIndexerStarted = true;
         }
-    }
-
-    @Override
-    public boolean isFinished(){
-        if(!isIndexerStarted && !timer.isRunning() && !shooter.BeamBreakDetected()){
-            timer.start();
-        } else if(shooter.BeamBreakDetected()){
-            timer.stop();
-            timer.reset();
-        }
-        if(timer.hasElapsed(Constants.sShooter.kTeleopMaxShootTime)){
-            timer.stop();
-            timer.reset();
-            return true;
-        }
-        return false;
     }
 
     @Override
