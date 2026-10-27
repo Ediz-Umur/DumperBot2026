@@ -24,10 +24,16 @@ public class EmptyHopper extends Command{
     @Override
     public void execute(){
         //If the intake is open, start moving the roller and indexer in the opposite direction
-        if(Math.abs(intake.GetPivotPosition() - Constants.sIntake.kPivotOpenPosition) < Constants.sIntake.tPivotTolerance || !isIntakeOpen){
+        if(Math.abs(intake.GetPivotPosition() - Constants.sIntake.kPivotOpenPosition) < Constants.sIntake.tPivotTolerance && !isIntakeOpen){
             indexer.IndexerMove(-Constants.sIndexer.kIndexerSpeed);
             intake.RollerMove(-Constants.sIntake.kRollerSpeed);
             isIntakeOpen = true;
         }
+    }
+
+    @Override
+    public void end(boolean isInterrupted){
+        indexer.IndexerStop();
+        intake.RollerStop();
     }
 }

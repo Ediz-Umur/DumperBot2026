@@ -213,7 +213,7 @@ public class Constants {
         public static final double pIndexerS = 0;
         public static final double pIndexerA = 0;
         public static final double pIndexerV = 0;
-        public static final double pIndexerP = 25;
+        public static final double pIndexerP = 50;
         public static final double pIndexerI = 0;
         public static final double pIndexerD = 0;
 
@@ -263,17 +263,17 @@ public class Constants {
         public static final double cKickerkS = 0; 
         public static final double cKickerkA = 0; 
         public static final double cKickerkV = 0; 
-        public static final double cKickerkP = 25; 
+        public static final double cKickerkP = 50; 
         public static final double cKickerkI = 0; 
         public static final double cKickerkD = 0; 
 
-        public static final double cHoodG = 0; //TODO
-        public static final double cHoodS = 0; //TODO
-        public static final double cHoodA = 0; //TODO
-        public static final double cHoodV = 0; //TODO
-        public static final double cHoodP = 25; //TODO
-        public static final double cHoodI = 0; //TODO
-        public static final double cHoodD = 0; //TODO
+        public static final double cHoodG = 0;
+        public static final double cHoodS = 0.03475;
+        public static final double cHoodA = 0;
+        public static final double cHoodV = 0;
+        public static final double cHoodP = 7;
+        public static final double cHoodI = 0;
+        public static final double cHoodD = 0.1;
 
         //MotionMagic Gains
         public static final double mmFlywheelAcceleration = 100; //TODO
@@ -301,7 +301,7 @@ public class Constants {
 
         //Tolerances
         public static final double tFlywheelTolerance = 5; //RotationsPerSecond //TODO
-        public static final double tHoodTolerance = 0.1; //Rotations //TODO
+        public static final double tHoodTolerance = 1; //Rotations
         public static final double tKickerTolerance = 5; //RotationsPerSecond //TODO
 
         //Misc
@@ -312,7 +312,7 @@ public class Constants {
         
         public static final double kHoodMinAngle = 10; //Degrees
         public static final double kHoodMaxAngle = 30; //Degrees
-        public static final double kHoodFeedAngle = 25;//Degrees
+        public static final double kHoodFeedAngle = 15;//Degrees
         public static final double kHoodClosedAngle = 5; //Degrees | The angle of the hood when it is not in use //TODO
 
         public static final double kFlywheelMult = 1.25; //The multiplier on the distance calculation

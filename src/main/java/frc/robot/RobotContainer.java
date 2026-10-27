@@ -97,7 +97,7 @@ public class RobotContainer {
 
             joystick.L2().onTrue(new IntakeMove());
 
-            joystick.R1().toggleOnTrue(new EmptyHopper());
+            joystick.square().toggleOnTrue(new EmptyHopper());
             
             joystick.R2().toggleOnTrue( 
                         Commands.parallel( //During that,
@@ -109,12 +109,12 @@ public class RobotContainer {
                     )
                 );
 
-            joystick.square().toggleOnTrue(new Feed());
+            joystick.R1().toggleOnTrue(new Feed());
 
             //Stopping the roller
             joystick.triangle().onTrue(new InstantCommand(() -> Constants.intake.RollerStop()));
 
-            joystick.cross().onTrue(new RollerToggle());
+            joystick.cross().onTrue(new InstantCommand(() -> Constants.intake.RollerMove(Constants.sIntake.kRollerSpeed)));
 
             joystick.circle().onTrue(new XLock());
 

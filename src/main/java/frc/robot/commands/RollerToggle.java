@@ -6,7 +6,8 @@ import frc.robot.subsystems.Intake;
 
 public class RollerToggle extends Command{
     Intake intake = Constants.intake;
-    double targetSpeed;
+    double targetSpeed = 0.0;
+    boolean isRollerStarted = false;
 
     public RollerToggle(){
         if(Math.abs(intake.GetRollerVelocity() - Constants.sIntake.kRollerSpeed) < Constants.sIntake.tRollerTolerance){
@@ -22,6 +23,8 @@ public class RollerToggle extends Command{
             targetSpeed = Constants.sIntake.kRollerSpeed;
         } else if(forcedDirection.equals("backwards")){
             targetSpeed = -Constants.sIntake.kRollerSpeed;
+        } else if(forcedDirection.equals("zero")){
+            targetSpeed = 0;
         }
         addRequirements(intake);
     }

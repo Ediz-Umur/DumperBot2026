@@ -5,17 +5,20 @@ import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicExpoTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.MotionMagicVelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.CANrange;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -62,6 +65,7 @@ public class Shooter extends SubsystemBase {
         m_LeftFlywheelConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
         m_Hood.setNeutralMode(NeutralModeValue.Brake);
+        m_HoodConfiguration.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
 
         m_LeftFlywheelConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cFlywheelCurrentLimit));
         m_KickerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cKickerCurrentLimit));
@@ -142,7 +146,9 @@ public class Shooter extends SubsystemBase {
 
     //Making the hood motor move
     public void HoodMove(double Degrees){
-        PositionTorqueCurrentFOC m_HoodMotionMagic = new PositionTorqueCurrentFOC(Degrees * Constants.sShooter.kHoodDegreeToRotation);
+        Degrees *= Constants.sShooter.kHoodDegreeToRotation;
+        PositionVoltage m_HoodMotionMagic = new PositionVoltage(Degrees);
+        SmartDashboard.putNumber("Hood Send Degree Value", Degrees);
         m_Hood.setControl(m_HoodMotionMagic);
     }
 
@@ -179,7 +185,7 @@ public class Shooter extends SubsystemBase {
 
     //Getting the angle of the hood
     public double GetHoodAngle(){
-        return(m_Hood.getPosition().getValueAsDouble());
+        return(m_Hood.getPosition().getValueAsDouble() / Constants.sShooter.kHoodDegreeToRotation);
     }
 
     //Gets whether the CANRange detected something
