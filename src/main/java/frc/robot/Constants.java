@@ -244,9 +244,9 @@ public class Constants {
         public static final int dRangeRight = 48;
 
         //CANCoder Configs
-        public static final double fMagnetOffset = 0; //TODO
-        public static final double fDiscontinuityPoint = 0; //TODO
-        public static final SensorDirectionValue fSensorDirection = SensorDirectionValue.CounterClockwise_Positive; //TODO
+        public static final double fMagnetOffset = 0.0;
+        public static final double fDiscontinuityPoint = 1;
+        public static final SensorDirectionValue fSensorDirection = SensorDirectionValue.Clockwise_Positive;
 
         //CANRange Configs
         public static final double rDetectionRange = 0.1; //Meters | The treshold for the detection range, any distance below this is considered "detected"
@@ -268,12 +268,12 @@ public class Constants {
         public static final double cKickerkD = 0; 
 
         public static final double cHoodG = 0;
-        public static final double cHoodS = 0.03475;
+        public static final double cHoodS = 0;
         public static final double cHoodA = 0;
         public static final double cHoodV = 0;
-        public static final double cHoodP = 7;
+        public static final double cHoodP = 20;
         public static final double cHoodI = 0;
-        public static final double cHoodD = 0.1;
+        public static final double cHoodD = 0;
 
         //MotionMagic Gains
         public static final double mmFlywheelAcceleration = 100; //TODO
@@ -288,8 +288,8 @@ public class Constants {
 
         //Motor Configs
         public static final double cFlywheelGearRatio = 1.5;
-        public static final double cHoodGearRatioMtE = 6.006;
-        public static final double cHoodGearRatioEtMc = 0.5;
+        public static final double cHoodGearRatioMtE = 6;
+        public static final double cHoodGearRatioEtMc = 9.4;
         public static final double cKickerGearRatio = 1.5; 
 
         public static final double cFlywheelCurrentLimit = 85;
@@ -313,7 +313,7 @@ public class Constants {
         public static final double kHoodMinAngle = 10; //Degrees
         public static final double kHoodMaxAngle = 30; //Degrees
         public static final double kHoodFeedAngle = 15;//Degrees
-        public static final double kHoodClosedAngle = 5; //Degrees | The angle of the hood when it is not in use //TODO
+        public static final double kHoodClosedAngle = 2; //Degrees | The angle of the hood when it is not in use //TODO
 
         public static final double kFlywheelMult = 1.25; //The multiplier on the distance calculation
         public static final double kFlywheelRadius = 0.04; //Meters
@@ -324,11 +324,11 @@ public class Constants {
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
         public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
-        public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoto command
-
-        public static final double kHoodDegreeToRotation = 0.302; //RotationPerDegree | How many rotations is 1 degree //TODO
+        public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoot command
 
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
+        
+        public static final double kHoodEncoderMagnetOffset = 0.012451; //The offset used by the CANcoder (the clearly defined MagnetOffset value is not used, courtesy of Ömer Tuna Çavdar.)
     }
 }

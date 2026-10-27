@@ -28,7 +28,6 @@ public class Robot extends TimedRobot {
     public Robot() {
         //Resets the intake encoder
         Constants.intake.PivotEncoderReset();
-        Constants.shooter.HoodReset();
 
         CommandScheduler.getInstance().schedule(FollowPathCommand.warmupCommand());
         VisionManager.OdometryInitialize();

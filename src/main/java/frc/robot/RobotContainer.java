@@ -100,7 +100,7 @@ public class RobotContainer {
             joystick.square().toggleOnTrue(new EmptyHopper());
             
             joystick.R2().toggleOnTrue( 
-                        Commands.parallel( //During that,
+                        Commands.parallel(
                             new Shoot(Constants.sShooter.kTeleopMaxShootTime), //Start the shoot command and
                             new AlignDrivetrain("hub").andThen(new XLock()) //Align the robot to the hub and XLock 
                             .until(() -> //Until 

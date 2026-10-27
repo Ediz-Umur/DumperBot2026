@@ -75,10 +75,9 @@ public class Shoot extends Command{
 
         TargetAngle = (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle;
 
-        //Setting flywheel, hood and kicker to the desired values
+        //Setting flywheel and hood to the desired values
         shooter.FlywheelMove(TargetRPS);
         shooter.HoodMove(TargetAngle);
-        shooter.KickerMove(Constants.sShooter.kKickerSpeed);
 
         //Putting angle and speed onto the dashboard (ONLY FOR DEBUGGING, REMOVE AFTER TESTS) //TODO
         SmartDashboard.putNumber("Target RPS", TargetRPS);
@@ -93,12 +92,12 @@ public class Shoot extends Command{
 
         //Checks whether everything is up to speed, and starts the indexer if everything is ready
         if(
-        Math.abs(shooter.GetFlywheelVelocity()- TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
+        Math.abs(shooter.GetFlywheelVelocity() - TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
         Math.abs(shooter.GetHoodAngle() - TargetAngle) < Constants.sShooter.tHoodTolerance &&
-        Math.abs(shooter.GetKickerVelocity() - Constants.sShooter.kKickerSpeed) < Constants.sShooter.tKickerTolerance &&
         !isIndexerStarted
         ){
             indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);
+            shooter.KickerMove(Constants.sShooter.kKickerSpeed);
             isIndexerStarted = true;
         }
     }

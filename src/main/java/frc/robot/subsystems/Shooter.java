@@ -4,6 +4,7 @@ import com.ctre.phoenix6.configs.*;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicExpoTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.MotionMagicVelocityTorqueCurrentFOC;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
@@ -77,7 +78,7 @@ public class Shooter extends SubsystemBase {
         m_EncoderConfigs.MagnetSensor.SensorDirection = Constants.sShooter.fSensorDirection;
         
         m_HoodConfiguration.Feedback.FeedbackRemoteSensorID = Constants.sShooter.dHoodEncoder;
-        m_HoodConfiguration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RotorSensor;
+        m_HoodConfiguration.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RemoteCANcoder;
 
         //CANrange Configuration
         m_RangeConfiguration.ProximityParams.MinSignalStrengthForValidMeasurement = Constants.sShooter.rMinSignalStrength;
@@ -146,8 +147,10 @@ public class Shooter extends SubsystemBase {
 
     //Making the hood motor move
     public void HoodMove(double Degrees){
-        Degrees *= Constants.sShooter.kHoodDegreeToRotation;
-        PositionVoltage m_HoodMotionMagic = new PositionVoltage(Degrees);
+        Degrees /= 360;
+        Degrees += Constants.sShooter.kHoodEncoderMagnetOffset;
+
+        PositionDutyCycle m_HoodMotionMagic = new PositionDutyCycle(Degrees);
         SmartDashboard.putNumber("Hood Send Degree Value", Degrees);
         m_Hood.setControl(m_HoodMotionMagic);
     }
@@ -185,7 +188,7 @@ public class Shooter extends SubsystemBase {
 
     //Getting the angle of the hood
     public double GetHoodAngle(){
-        return(m_Hood.getPosition().getValueAsDouble() / Constants.sShooter.kHoodDegreeToRotation);
+        return(m_Hood.getPosition().getValueAsDouble() * 360);
     }
 
     //Gets whether the CANRange detected something
