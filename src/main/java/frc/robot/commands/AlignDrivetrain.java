@@ -49,8 +49,6 @@ public class AlignDrivetrain extends Command{
 
     @Override
     public void execute(){
-        System.out.println("aligning");
-        System.out.println(counter);
         //Getting the target and current angle
         Translation2d CurrentPosition = Constants.drivetrain.getState().Pose.getTranslation();
         Translation2d TargetVector = CurrentPosition.minus(TargetPosition);

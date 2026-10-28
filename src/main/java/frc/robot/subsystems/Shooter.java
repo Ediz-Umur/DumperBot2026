@@ -65,12 +65,15 @@ public class Shooter extends SubsystemBase {
         m_KickerConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
         m_LeftFlywheelConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
-        m_Hood.setNeutralMode(NeutralModeValue.Brake);
+        m_KickerConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+        m_HoodConfiguration.MotorOutput.NeutralMode = NeutralModeValue.Brake;
         m_HoodConfiguration.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
 
         m_LeftFlywheelConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cFlywheelCurrentLimit));
         m_KickerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cKickerCurrentLimit));
         m_HoodConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cHoodCurrentLimit));
+
+        m_HoodConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withSupplyCurrentLimit(Constants.sShooter.cHoodCurrentLimit));
 
         //CANcoder Configs (Currently on FUSED, fallback is REMOTE)
         m_EncoderConfigs.MagnetSensor.MagnetOffset = Constants.sShooter.fMagnetOffset;
@@ -120,7 +123,7 @@ public class Shooter extends SubsystemBase {
 
         //Cloning the identical parts of the left and right flywheel configuratior
         m_RightFlywheelConfiguration.Slot0 = m_LeftFlywheelConfiguration.Slot0;
-        m_RightFlywheelConfiguration.MotionMagic = m_LeftFlywheelConfiguration.MotionMagic;
+        m_RightFlywheelConfiguration.CurrentLimits = m_LeftFlywheelConfiguration.CurrentLimits;
         m_RightFlywheelConfiguration.Feedback = m_LeftFlywheelConfiguration.Feedback;
 
         m_RightFlywheelConfiguration.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
@@ -188,7 +191,7 @@ public class Shooter extends SubsystemBase {
 
     //Getting the angle of the hood
     public double GetHoodAngle(){
-        return(m_Hood.getPosition().getValueAsDouble() * 360);
+        return((m_Hood.getPosition().getValueAsDouble() - Constants.sShooter.kHoodEncoderMagnetOffset) * 360);
     }
 
     //Gets whether the CANRange detected something

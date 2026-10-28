@@ -18,6 +18,7 @@ public class EmptyHopper extends Command{
 
     @Override
     public void initialize(){
+        isIntakeOpen = false;
         intake.GoToPosition(Constants.sIntake.kPivotOpenPosition);
     }
 

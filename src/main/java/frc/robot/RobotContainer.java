@@ -121,9 +121,12 @@ public class RobotContainer {
             //Resetting the Gyro
             joystick.options().onTrue(new InstantCommand(() -> Constants.drivetrain.resetRotation(new Rotation2d(0))));
 
+            //Test Inputs
             joystick.povUp().onTrue(new IntakeMove("zero"));
 
             joystick.povDown().onTrue(new AlignDrivetrain("hub"));
+
+            joystick.povLeft().onTrue(new IntakeMove("open"));
         }
 
         drivetrain.registerTelemetry(logger::telemeterize);

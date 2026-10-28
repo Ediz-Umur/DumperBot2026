@@ -24,6 +24,7 @@ public class Indexer extends SubsystemBase{
         m_IndexerConfiguration.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
 
         m_IndexerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sIndexer.cIndexerCurrentLimit));
+        m_IndexerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withSupplyCurrentLimit(Constants.sIndexer.cIndexerSupplyCurrentLimit));
 
         //PID Gains
         m_IndexerPIDConfigs.kS = Constants.sIndexer.pIndexerS;

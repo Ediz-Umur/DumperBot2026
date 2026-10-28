@@ -199,7 +199,7 @@ public class Constants {
 
         //Misc
         public static final double kPivotOpenPosition = 260; //Rotations | The encoder rotation value when the intake is OPEN
-        public static final double kPivotClosedPosition = 35; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
+        public static final double kPivotClosedPosition = 90; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
         public static final double kRollerSpeed = 65; //RotationsPerSecond
 
         public static final double kOscillateWaitTime = 1.5; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
@@ -210,10 +210,10 @@ public class Constants {
         public static final int dIndexerMotorID = 30;
 
         //PID
-        public static final double pIndexerS = 0;
+        public static final double pIndexerS = 0.2;
         public static final double pIndexerA = 0;
         public static final double pIndexerV = 0;
-        public static final double pIndexerP = 50;
+        public static final double pIndexerP = 120;
         public static final double pIndexerI = 0;
         public static final double pIndexerD = 0;
 
@@ -223,13 +223,14 @@ public class Constants {
 
         //Motor Configs
         public static final double cIndexerGearRatio = 1.5;
-        public static final int cIndexerCurrentLimit = 50; //TODO
+        public static final int cIndexerCurrentLimit = 120;
+        public static final double cIndexerSupplyCurrentLimit = 50;
 
         //Tolerances
         public static final double tIndexerTolerance = 1; //RotationsPerSecond //TODO
 
         //Misc
-        public static final double kIndexerSpeed = 70; //RotationsPerSecond //TODO
+        public static final double kIndexerSpeed = 60; //RotationsPerSecond //TODO
     }
     public class sShooter{
         //Devide IDs
@@ -249,29 +250,29 @@ public class Constants {
         public static final SensorDirectionValue fSensorDirection = SensorDirectionValue.Clockwise_Positive;
 
         //CANRange Configs
-        public static final double rDetectionRange = 0.1; //Meters | The treshold for the detection range, any distance below this is considered "detected"
+        public static final double rDetectionRange = 0.35; //Meters | The treshold for the detection range, any distance below this is considered "detected"
         public static final double rMinSignalStrength = 2500; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
 
         //PID Gains
         public static final double cFlywheelS = 0.0235;
         public static final double cFlywheelA = 0.008;
         public static final double cFlywheelV = 0.185;
-        public static final double cFlywheelP = 6.7;
+        public static final double cFlywheelP = 5;
         public static final double cFlywheelI = 0;
         public static final double cFlywheelD = 0;
 
-        public static final double cKickerkS = 0; 
+        public static final double cKickerkS = 0.2; 
         public static final double cKickerkA = 0; 
         public static final double cKickerkV = 0; 
-        public static final double cKickerkP = 50; 
+        public static final double cKickerkP = 120; 
         public static final double cKickerkI = 0; 
         public static final double cKickerkD = 0; 
 
-        public static final double cHoodG = 0;
+        public static final double cHoodG = 0.015;
         public static final double cHoodS = 0;
         public static final double cHoodA = 0;
         public static final double cHoodV = 0;
-        public static final double cHoodP = 20;
+        public static final double cHoodP = 22.5;
         public static final double cHoodI = 0;
         public static final double cHoodD = 0;
 
@@ -294,20 +295,22 @@ public class Constants {
 
         public static final double cFlywheelCurrentLimit = 85;
         public static final double cHoodCurrentLimit = 50; //TODO
-        public static final double cKickerCurrentLimit = 50; //TODO
+        public static final double cKickerCurrentLimit = 120; //TODO
+        
+        public static final double cKickerSupplyCurrentLimit = 50;
 
         public static final InvertedValue cLeftFlywheelModuleInverted = InvertedValue.Clockwise_Positive; //TODO
         public static final InvertedValue cRightFlywheelModuleInverted = InvertedValue.CounterClockwise_Positive; //TODO
 
         //Tolerances
-        public static final double tFlywheelTolerance = 5; //RotationsPerSecond //TODO
-        public static final double tHoodTolerance = 1; //Rotations
-        public static final double tKickerTolerance = 5; //RotationsPerSecond //TODO
+        public static final double tFlywheelTolerance = 2; //RotationsPerSecond
+        public static final double tHoodTolerance = 0.5; //Degrees
+        public static final double tKickerTolerance = 0.5; //RotationsPerSecond
 
         //Misc
-        public static final double kKickerSpeed = 70; //RotationsPerSecond
+        public static final double kKickerSpeed = 60; //RotationsPerSecond
 
-        public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond //TODO
+        public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond
         public static final double kFlywheelFeedSpeed = 40; //RotationsPerSecond | The speed of the flywheel while feeding
         
         public static final double kHoodMinAngle = 10; //Degrees
@@ -315,12 +318,19 @@ public class Constants {
         public static final double kHoodFeedAngle = 15;//Degrees
         public static final double kHoodClosedAngle = 2; //Degrees | The angle of the hood when it is not in use //TODO
 
-        public static final double kFlywheelMult = 1.25; //The multiplier on the distance calculation
         public static final double kFlywheelRadius = 0.04; //Meters
         
         public static final double kFlywheelHeight = 0.404; //Meters
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0.335);
-        public static final double kIdealAngle = -75; //Degrees | The ideal angle for the ball to go into the hub, with respect to the ground
+
+        public static final double kIdealAngleS1 = -77; //Degrees | The ideal angle for the ball to go into the hub, with respect to the ground
+        public static final double kIdealAngleS2 = -75; //Degrees
+
+        public static final double kFlywheelMultS1 = 0.95; //The multiplier on the distance calculation
+        public static final double kFlywheelMultS2 = 1.07; //The multiplier on the distance calculation
+
+
+        public static final double kDistanceS12 = 2.5; //Meters | At which distance will the shoot mechanism go from S1 to S2
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
         public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
@@ -329,6 +339,6 @@ public class Constants {
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
         
-        public static final double kHoodEncoderMagnetOffset = 0.012451; //The offset used by the CANcoder (the clearly defined MagnetOffset value is not used, courtesy of Ömer Tuna Çavdar.)
+        public static final double kHoodEncoderMagnetOffset = 0.012451; //The offset used by the CANcoder
     }
 }
