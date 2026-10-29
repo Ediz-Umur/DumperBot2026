@@ -39,7 +39,7 @@ public class RobotContainer {
     boolean isSysID = false;
     boolean isCompetition = false;
 
-    private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
+    private SendableChooser<Command> autoChooser;
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(Constants.sDrivetrain.kMaxSpeed * 0.1).withRotationalDeadband(Constants.sDrivetrain.kMaxAngularRate * 0.1) // Add a 10% deadband
@@ -54,6 +54,7 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = Constants.drivetrain;
 
     public RobotContainer() {
+        
         NamedCommands.registerCommand("Shoot", Commands.parallel(
                      /* The oscillating command  */     Commands.sequence(
                     /* Wait for the set wait time */        Commands.waitSeconds(Constants.sIntake.kOscillateWaitTime), 
@@ -63,6 +64,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("IntakeMove", new IntakeMove());
         NamedCommands.registerCommand("IntakeOscillate", new IntakeOscillate());
         NamedCommands.registerCommand("RollerStop", new InstantCommand(() -> Constants.intake.RollerStop()));
+
+        autoChooser = AutoBuilder.buildAutoChooser();
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
         configureBindings();
@@ -133,21 +136,6 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        // Simple drive forward auton
-        final var idle = new SwerveRequest.Idle();
-        return Commands.sequence(
-            // Reset our field centric heading to match the robot
-            // facing away from our alliance station wall (0 deg).
-            drivetrain.runOnce(() -> drivetrain.seedFieldCentric(Rotation2d.kZero)),
-            // Then slowly drive forward (away from us) for 5 seconds.
-            drivetrain.applyRequest(() ->
-                drive.withVelocityX(0.5)
-                    .withVelocityY(0)
-                    .withRotationalRate(0)
-            )
-            .withTimeout(5.0),
-            // Finally idle for the rest of auton
-            drivetrain.applyRequest(() -> idle)
-        );
+        return autoChooser.getSelected();
     }
 }

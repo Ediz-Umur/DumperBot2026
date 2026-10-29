@@ -142,7 +142,7 @@ public class Constants {
         public static final double tCounterAmount = 15; //The number that the counter has to reach to consider the command done
         public static final double tDegreeTolerance = 1; //Degrees | The ± degree tolerance given to the drivetrain angle
 
-        public static final double pHubAlignP = 0.150;
+        public static final double pHubAlignP = 0.165;
         public static final double pHubAlignI = 0.0;
         public static final double pHubAlignD = 0.01;
 
@@ -218,8 +218,8 @@ public class Constants {
         public static final double pIndexerD = 0;
 
         //MotionMagic 
-        public static final double mmIndexerAcceleration = 100; //TODO
-        public static final double mmIndexerJerk = 1000; //TODO
+        public static final double mmIndexerAcceleration = 100;
+        public static final double mmIndexerJerk = 1000;
 
         //Motor Configs
         public static final double cIndexerGearRatio = 1.5;
@@ -227,10 +227,10 @@ public class Constants {
         public static final double cIndexerSupplyCurrentLimit = 50;
 
         //Tolerances
-        public static final double tIndexerTolerance = 1; //RotationsPerSecond //TODO
+        public static final double tIndexerTolerance = 1; //RotationsPerSecond
 
         //Misc
-        public static final double kIndexerSpeed = 60; //RotationsPerSecond //TODO
+        public static final double kIndexerSpeed = 65; //RotationsPerSecond
     }
     public class sShooter{
         //Devide IDs
@@ -254,12 +254,12 @@ public class Constants {
         public static final double rMinSignalStrength = 2500; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
 
         //PID Gains
-        public static final double cFlywheelS = 0.0235;
-        public static final double cFlywheelA = 0.008;
-        public static final double cFlywheelV = 0.185;
-        public static final double cFlywheelP = 5;
+        public static final double cFlywheelS = 0.02;
+        public static final double cFlywheelA = 0;
+        public static final double cFlywheelV = 0;
+        public static final double cFlywheelP = 15;
         public static final double cFlywheelI = 0;
-        public static final double cFlywheelD = 0;
+        public static final double cFlywheelD = 0.05;
 
         public static final double cKickerkS = 0.2; 
         public static final double cKickerkA = 0; 
@@ -293,17 +293,18 @@ public class Constants {
         public static final double cHoodGearRatioEtMc = 9.4;
         public static final double cKickerGearRatio = 1.5; 
 
-        public static final double cFlywheelCurrentLimit = 85;
+        public static final double cFlywheelCurrentLimit = 70;
         public static final double cHoodCurrentLimit = 50; //TODO
         public static final double cKickerCurrentLimit = 120; //TODO
         
+        public static final double cFlywheelSupplyCurrentLimit = 50;
         public static final double cKickerSupplyCurrentLimit = 50;
 
         public static final InvertedValue cLeftFlywheelModuleInverted = InvertedValue.Clockwise_Positive; //TODO
         public static final InvertedValue cRightFlywheelModuleInverted = InvertedValue.CounterClockwise_Positive; //TODO
 
         //Tolerances
-        public static final double tFlywheelTolerance = 2; //RotationsPerSecond
+        public static final double tFlywheelTolerance = 4; //RotationsPerSecond
         public static final double tHoodTolerance = 0.5; //Degrees
         public static final double tKickerTolerance = 0.5; //RotationsPerSecond
 
@@ -320,17 +321,12 @@ public class Constants {
 
         public static final double kFlywheelRadius = 0.04; //Meters
         
-        public static final double kFlywheelHeight = 0.404; //Meters
+        public static final double kFlywheelHeight = 0.43; //Meters
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0.335);
 
-        public static final double kIdealAngleS1 = -77; //Degrees | The ideal angle for the ball to go into the hub, with respect to the ground
-        public static final double kIdealAngleS2 = -75; //Degrees
+        public static final double kIdealAngle = -65; //Degrees
 
-        public static final double kFlywheelMultS1 = 0.95; //The multiplier on the distance calculation
-        public static final double kFlywheelMultS2 = 1.07; //The multiplier on the distance calculation
-
-
-        public static final double kDistanceS12 = 2.5; //Meters | At which distance will the shoot mechanism go from S1 to S2
+        public static final double kFlywheelMult = 0.955; //The multiplier on the distance calculation
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
         public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous

@@ -19,8 +19,7 @@ public class Shoot extends Command{
     double TargetRPS;
     double TargetAngle;
     double Distance;
-    double idealAngle = -70;
-    double multiplier = 0.97;
+    double multiplier = Constants.sShooter.kFlywheelMult;
 
     boolean isIndexerStarted = false;
 
@@ -35,24 +34,26 @@ public class Shoot extends Command{
     public double DistanceToRPS(double distance, double angle){
         //Meters --> RotationPerSecond
 
-        double height = Constants.sFieldElement.kHubHeight;
+        double height = Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight;
         
         double Velocity = Math.sqrt((-9.8*Math.pow(distance, 2)*(1 + Math.pow(Math.tan(Math.toRadians(angle)), 2))) / ((2 * height) - 2 * distance * Math.tan(Math.toRadians(angle))));
-        //TODO SmartDashboard.putNumber("Raw Target Velocity", Velocity);
-        return((Units.radiansPerSecondToRotationsPerMinute(Velocity / Constants.sShooter.kFlywheelRadius)) * multiplier) / 60;
+        SmartDashboard.putNumber("Raw Target Velocity", Velocity);
+
+        return (2 * Velocity * multiplier) / (0.1237 * Math.PI);
+        //return((Units.radiansPerSecondToRotationsPerMinute(Velocity / Constants.sShooter.kFlywheelRadius)) * multiplier) / 60;
     }
 
-    public double DistanceToAngle(double distance){
+    public static double DistanceToAngle(double distance){
         //Meters --> Degrees
         
-        double S = Math.toRadians(idealAngle);
-        double H = Constants.sFieldElement.kHubHeight;
+        double S = Math.toRadians(Constants.sShooter.kIdealAngle);
+        double H = Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight;
 
         double Angle = Math.toDegrees(Math.atan((Math.tan(S) * distance - (2 * H)) / -distance));
         return(Angle);
     }
 
-    public double getDistance(){
+    public static double getDistance(){
         //Meters
         //Get the Hub Translation
         if (Constants.blueAlliance){
@@ -65,7 +66,6 @@ public class Shoot extends Command{
         Translation2d ShooterTranslation = Constants.drivetrain.getState().Pose.getTranslation().minus(Constants.sShooter.kFlywheelOffsetFromCenter);
 
         //Return the distance between the translations
-        System.out.println(ShooterTranslation.getDistance(TargetTranslation));
         return(ShooterTranslation.getDistance(TargetTranslation));
     }
 
@@ -75,17 +75,6 @@ public class Shoot extends Command{
 
         //Getting the target RPS and angle data
         Distance = getDistance();
-
-        if(Distance <= Constants.sShooter.kDistanceS12){
-            SmartDashboard.putNumber("Stage", 1);
-            idealAngle = Constants.sShooter.kIdealAngleS1;
-            multiplier = Constants.sShooter.kFlywheelMultS1;
-        } else {
-            SmartDashboard.putNumber("Stage", 2);
-            idealAngle = Constants.sShooter.kIdealAngleS2;
-            multiplier = Constants.sShooter.kFlywheelMultS2;
-        }
-
         TargetAngle = DistanceToAngle(Distance);
         TargetRPS = DistanceToRPS(Distance, TargetAngle);
 
@@ -96,7 +85,7 @@ public class Shoot extends Command{
         shooter.HoodMove(TargetAngle);
 
         //Putting angle and speed onto the dashboard (ONLY FOR DEBUGGING, REMOVE AFTER TESTS) //TODO
-        //TODO SmartDashboard.putNumber("Calculated Distance", Distance);
+        SmartDashboard.putNumber("Calculated Distance", Distance);
         SmartDashboard.putNumber("Target RPS", TargetRPS);
         SmartDashboard.putNumber("Target Angle", TargetAngle);
     }

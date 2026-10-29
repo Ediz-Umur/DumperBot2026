@@ -7,6 +7,7 @@ import com.ctre.phoenix6.controls.MotionMagicVelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -73,6 +74,7 @@ public class Shooter extends SubsystemBase {
         m_KickerConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cKickerCurrentLimit));
         m_HoodConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withStatorCurrentLimit(Constants.sShooter.cHoodCurrentLimit));
 
+        m_LeftFlywheelConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withSupplyCurrentLimit(Constants.sShooter.cFlywheelSupplyCurrentLimit));
         m_HoodConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withSupplyCurrentLimit(Constants.sShooter.cHoodCurrentLimit));
 
         //CANcoder Configs (Currently on FUSED, fallback is REMOTE)
@@ -167,7 +169,7 @@ public class Shooter extends SubsystemBase {
     } */
 
     public void FlywheelMove(double RPS){
-        VelocityVoltage m_FlywheelMotionMagic = new VelocityVoltage(RPS);
+        VelocityTorqueCurrentFOC m_FlywheelMotionMagic = new VelocityTorqueCurrentFOC(RPS);
         m_LeftShooterLeader.setControl(m_FlywheelMotionMagic);
         m_LeftFollowerShooter.setControl(new Follower(Constants.sShooter.dLeftShooterLeaderID, MotorAlignmentValue.Aligned));
         m_RightShooterLeader.setControl(m_FlywheelMotionMagic);

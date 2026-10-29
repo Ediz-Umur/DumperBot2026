@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.Shoot;
 
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
@@ -42,6 +43,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
+        double TargetAngle = Shoot.DistanceToAngle(Shoot.getDistance());
+        SmartDashboard.putBoolean("Is Far Enough", (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle > 0);
+
         field.setRobotPose(Constants.drivetrain.getState().Pose);
         m_timeAndJoystickReplay.update();
         CommandScheduler.getInstance().run(); 
