@@ -30,12 +30,9 @@ public class Robot extends TimedRobot {
         //Resets the intake encoder
         Constants.intake.PivotEncoderReset();
 
-        CommandScheduler.getInstance().schedule(FollowPathCommand.warmupCommand());
         VisionManager.OdometryInitialize();
 
         m_robotContainer = new RobotContainer();
-
-        //Constants.drivetrain.configureAutoBuilder();
 
         SmartDashboard.putData("Field", field);      
         SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
@@ -44,7 +41,8 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         double TargetAngle = Shoot.DistanceToAngle(Shoot.getDistance());
-        SmartDashboard.putBoolean("Is Far Enough", (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle > 0);
+        TargetAngle = (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle;
+        SmartDashboard.putBoolean("Can Shoot", TargetAngle > 0 && TargetAngle < Constants.sShooter.kHoodMaxAngle - Constants.sShooter.kHoodMinAngle);
 
         field.setRobotPose(Constants.drivetrain.getState().Pose);
         m_timeAndJoystickReplay.update();

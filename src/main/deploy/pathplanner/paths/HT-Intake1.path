@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 7.975622807017542,
-        "y": 4.592
+        "x": 7.878,
+        "y": 3.674567022538553
       },
       "prevControl": {
-        "x": 7.9132661881368165,
-        "y": 3.2248892503722972
+        "x": 7.8156433811192745,
+        "y": 2.3074562729108505
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,8 +46,12 @@
   ],
   "rotationTargets": [
     {
+      "waypointRelativePos": 0.6648936170212782,
+      "rotationDegrees": 180.0
+    },
+    {
       "waypointRelativePos": 0.9620721554116527,
-      "rotationDegrees": 80.0
+      "rotationDegrees": -100.0
     }
   ],
   "constraintZones": [
@@ -89,13 +93,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 80.0
+    "rotation": -100.0
   },
   "reversed": false,
   "folder": "HP Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

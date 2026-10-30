@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.639526315789473,
-        "y": 7.432271929824561
+        "x": 4.289098457888494,
+        "y": 7.429525504151838
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.639526315789473,
-        "y": 7.432271929824561
+        "x": 5.289098457888494,
+        "y": 7.429525504151838
       },
       "isLocked": false,
       "linkedName": "DT-Start"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 7.975622807017542,
-        "y": 3.4780701754385976
+        "x": 7.848324561403508,
+        "y": 4.3954329774614465
       },
       "prevControl": {
-        "x": 7.986030443195586,
-        "y": 3.7278534437116857
+        "x": 7.858732197581553,
+        "y": 4.6452162457345345
       },
       "nextControl": null,
       "isLocked": false,
@@ -46,8 +46,12 @@
   ],
   "rotationTargets": [
     {
+      "waypointRelativePos": 0.6569148936170207,
+      "rotationDegrees": 180.0
+    },
+    {
       "waypointRelativePos": 0.9602220166512498,
-      "rotationDegrees": -80.0
+      "rotationDegrees": 100.0
     }
   ],
   "constraintZones": [
@@ -89,13 +93,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -80.0
+    "rotation": 100.0
   },
   "reversed": false,
   "folder": "Depot Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }

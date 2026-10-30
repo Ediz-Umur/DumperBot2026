@@ -140,7 +140,7 @@ public class Constants {
         //HubAlign
         public static final double tMaxTimer = 0.5; //The maximum amount of time the command can run
         public static final double tCounterAmount = 15; //The number that the counter has to reach to consider the command done
-        public static final double tDegreeTolerance = 1; //Degrees | The ± degree tolerance given to the drivetrain angle
+        public static final double tDegreeTolerance = 0.5; //Degrees | The ± degree tolerance given to the drivetrain angle
 
         public static final double pHubAlignP = 0.165;
         public static final double pHubAlignI = 0.0;
@@ -230,7 +230,7 @@ public class Constants {
         public static final double tIndexerTolerance = 1; //RotationsPerSecond
 
         //Misc
-        public static final double kIndexerSpeed = 65; //RotationsPerSecond
+        public static final double kIndexerSpeed = 20; //RotationsPerSecond
     }
     public class sShooter{
         //Devide IDs
@@ -254,12 +254,12 @@ public class Constants {
         public static final double rMinSignalStrength = 2500; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
 
         //PID Gains
-        public static final double cFlywheelS = 0.02;
+        public static final double cFlywheelS = 0.03;
         public static final double cFlywheelA = 0;
         public static final double cFlywheelV = 0;
-        public static final double cFlywheelP = 15;
+        public static final double cFlywheelP = 17.75;
         public static final double cFlywheelI = 0;
-        public static final double cFlywheelD = 0.05;
+        public static final double cFlywheelD = 0.085;
 
         public static final double cKickerkS = 0.2; 
         public static final double cKickerkA = 0; 
@@ -309,7 +309,7 @@ public class Constants {
         public static final double tKickerTolerance = 0.5; //RotationsPerSecond
 
         //Misc
-        public static final double kKickerSpeed = 60; //RotationsPerSecond
+        public static final double kKickerSpeed = 20; //RotationsPerSecond
 
         public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond
         public static final double kFlywheelFeedSpeed = 40; //RotationsPerSecond | The speed of the flywheel while feeding
@@ -324,17 +324,17 @@ public class Constants {
         public static final double kFlywheelHeight = 0.43; //Meters
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0.335);
 
-        public static final double kIdealAngle = -65; //Degrees
+        public static final double kIdealAngle = -34; //Degrees
 
-        public static final double kFlywheelMult = 0.955; //The multiplier on the distance calculation
+        public static final double kFlywheelMult = 0.8989999; //The multiplier on the distance calculation
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
-        public static final double kAutoMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
+        public static final double kAutoMaxShootTime = 2; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
         public static final double kOscillateDelayTime = 1; //Seconds | How much the command waits before starting the IntakeOscillate command suring the Shoot command
 
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
         
-        public static final double kHoodEncoderMagnetOffset = 0.012451; //The offset used by the CANcoder
+        public static final double kHoodEncoderMagnetOffset = 0.071045; //The offset used by the CANcoder
     }
 }

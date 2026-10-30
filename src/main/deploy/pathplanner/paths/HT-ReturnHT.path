@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.975622807017542,
-        "y": 4.592
+        "x": 7.878,
+        "y": 3.674567022538553
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.224521210736153,
-        "y": 4.56855677867
+        "x": 8.126898403718611,
+        "y": 3.651123801208553
       },
       "isLocked": false,
       "linkedName": "H-Intake"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 3.042815789473684,
-        "y": 0.606
+        "x": 2.7612930011862398,
+        "y": 0.9417319098457893
       },
       "prevControl": {
-        "x": 3.9495526832380285,
-        "y": 0.6233987752584266
+        "x": 3.6680298949505845,
+        "y": 0.9591306851042158
       },
       "nextControl": null,
       "isLocked": false,
@@ -76,7 +76,7 @@
   "folder": "HP Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 80.0
+    "rotation": -100.0
   },
   "useDefaultConstraints": true
 }

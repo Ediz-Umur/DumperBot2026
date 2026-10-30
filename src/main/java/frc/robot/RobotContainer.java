@@ -8,7 +8,7 @@ import static edu.wpi.first.units.Units.*;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
+import com.pathplanner.lib.commands.FollowPathCommand;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -17,8 +17,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -39,7 +41,7 @@ public class RobotContainer {
     boolean isSysID = false;
     boolean isCompetition = false;
 
-    private SendableChooser<Command> autoChooser;
+    public SendableChooser<Command> autoChooser;
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(Constants.sDrivetrain.kMaxSpeed * 0.1).withRotationalDeadband(Constants.sDrivetrain.kMaxAngularRate * 0.1) // Add a 10% deadband
@@ -54,20 +56,23 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = Constants.drivetrain;
 
     public RobotContainer() {
-        
-        NamedCommands.registerCommand("Shoot", Commands.parallel(
+        Constants.drivetrain.configureAutoBuilder();
+
+        NamedCommands.registerCommand("Shoot", Commands.race(
                      /* The oscillating command  */     Commands.sequence(
                     /* Wait for the set wait time */        Commands.waitSeconds(Constants.sIntake.kOscillateWaitTime), 
                     /* Then start the oscillation */        new IntakeOscillate()),
                                                         new Shoot(Constants.sShooter.kAutoMaxShootTime)));   
 
-        NamedCommands.registerCommand("IntakeMove", new IntakeMove());
+        NamedCommands.registerCommand("IntakeMove", new IntakeMove("open"));
         NamedCommands.registerCommand("IntakeOscillate", new IntakeOscillate());
         NamedCommands.registerCommand("RollerStop", new InstantCommand(() -> Constants.intake.RollerStop()));
 
         autoChooser = AutoBuilder.buildAutoChooser();
-
         SmartDashboard.putData("Auto Chooser", autoChooser);
+
+        CommandScheduler.getInstance().schedule(FollowPathCommand.warmupCommand());
+
         configureBindings();
     }
 

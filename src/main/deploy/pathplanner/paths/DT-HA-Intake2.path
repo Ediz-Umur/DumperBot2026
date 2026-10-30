@@ -48,12 +48,12 @@
     },
     {
       "anchor": {
-        "x": 7.975622807017542,
-        "y": 3.4780701754385976
+        "x": 7.848324561403508,
+        "y": 4.3954329774614465
       },
       "prevControl": {
-        "x": 7.911973684210526,
-        "y": 4.385070175438597
+        "x": 7.7846754385964925,
+        "y": 5.302432977461446
       },
       "nextControl": null,
       "isLocked": false,
@@ -63,11 +63,11 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 1.0129509713228502,
-      "rotationDegrees": 0.0
+      "rotationDegrees": 180.0
     },
     {
       "waypointRelativePos": 1.9703977798334869,
-      "rotationDegrees": -80.0
+      "rotationDegrees": 100.0
     }
   ],
   "constraintZones": [
@@ -109,7 +109,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -80.0
+    "rotation": 100.0
   },
   "reversed": false,
   "folder": "Depot Trench",

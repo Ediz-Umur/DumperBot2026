@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.042815789473684,
-        "y": 7.464096491228071
+        "x": 2.7074970344009497,
+        "y": 7.182064056939502
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.505565419680507,
-        "y": 7.211318979963152
+        "x": 3.170246664607773,
+        "y": 6.929286545674582
       },
       "isLocked": false,
       "linkedName": "DT-ReturnDT"
@@ -48,7 +48,7 @@
   "folder": "Depot Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -73.25209694160003
+    "rotation": -58.54654787479725
   },
   "useDefaultConstraints": true
 }

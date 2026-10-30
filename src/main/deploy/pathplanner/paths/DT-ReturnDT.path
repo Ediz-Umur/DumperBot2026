@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.975622807017542,
-        "y": 3.4780701754385976
+        "x": 7.848324561403508,
+        "y": 4.3954329774614465
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.3920850071248365,
-        "y": 4.325960877854864
+        "x": 7.264786761510803,
+        "y": 5.2433236798777125
       },
       "isLocked": false,
       "linkedName": "D-Intake"
@@ -32,12 +32,12 @@
     },
     {
       "anchor": {
-        "x": 3.042815789473684,
-        "y": 7.464096491228071
+        "x": 2.7074970344009497,
+        "y": 7.182064056939502
       },
       "prevControl": {
-        "x": 4.446645103011806,
-        "y": 7.449746638192197
+        "x": 4.111326347939072,
+        "y": 7.1677142039036275
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,19 +47,7 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [
-    {
-      "name": "IntakeMove",
-      "waypointRelativePos": 0.28467532467532436,
-      "endWaypointRelativePos": null,
-      "command": {
-        "type": "named",
-        "data": {
-          "name": "IntakeMove"
-        }
-      }
-    }
-  ],
+  "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -70,13 +58,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -73.25209694160003
+    "rotation": -58.54654787479725
   },
   "reversed": false,
   "folder": "Depot Trench",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -80.0
+    "rotation": 100.0
   },
   "useDefaultConstraints": true
 }
