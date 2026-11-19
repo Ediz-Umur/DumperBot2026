@@ -5,7 +5,15 @@ import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 
+import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.numbers.N1;
+import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.generated.TunerConstants;
@@ -62,8 +70,8 @@ import frc.robot.subsystems.Shooter;
      * Any other miscellanious constants have their units and descriptions written on them.
      * 
      * OTHER COMMON WORDS:
-     * GearRatio
      * 
+     * GearRatio
      * The ratio of movement between the motor and mechanism, motor and encoder, or encoder and mechanism
      * Simply, it is the number of times the motor / encoder have to rotate for the encoder / mechanism to fully rotate once. Numbers higher than 1 is a reduction, smaller is a step-up
      * If there is no encoder, the GR is always Motor --> Mechanism and the value will simple say (___GearRatio)
@@ -109,20 +117,21 @@ public class Constants {
 
     public class sVision{
         //Camera Specifics
-        public static final String[] cCameraNames = {"limelight-tavuk", "limelight-karga", "limelight-ordek"};
-        public static final int cCameraIMUMode = 0;
+        public static final String[] cCameraNames = {"Tavuk", "Karga", "Ordek"};
+        public static final Transform3d[] cRobotToCameraPositions = {
+            new Transform3d(new Translation3d(0.026,-0.324,0.411), new Rotation3d(0, -Units.degreesToRadians(25), -Units.degreesToRadians(90))),
+            new Transform3d(new Translation3d(0.026,0.324,0.411), new Rotation3d(0, -Units.degreesToRadians(25), Units.degreesToRadians(90))),
+            new Transform3d(new Translation3d(0.333, 0, 0.203), new Rotation3d(0, -Units.degreesToRadians(15), 0))
+        };
 
         //Pose Estimator
-        public static final double pXYBase = 0.3; //Meters | The base std value for the translation
-        public static final double pRotBase = 0.65; //Degrees | The base std value for the rotation
+        public final static Matrix<N3, N1> pSingleTag = VecBuilder.fill(1.1, 1.1, 1.5);
+        public final static Matrix<N3, N1> pMultitag = VecBuilder.fill(0.7, 0.7, 0.9);
 
-        public static final double pXYScale = 0.2;  //Meters | How much to increase the std dev by per meter of tag distance
-        public static final double pRotScale = 0.2; //Degrees | How much to increase the std dev by per meter of tag distance
+        public final static double pAvgMaxDistance = 4; //How far the avgDist has to be for a 1 tag pose before the pose is trashed
+        public final static double pStdPenalty = 30; //How much the Std dev is increased for 1 tag poses (LOWER MEANS MORE PENALTY)
 
-        public static final double pXYMin = 0.15; //The minimum std value for the translation
-        public static final double pXYMax = 1; //The maximum std value for the translation
-        public static final double pRotMin = 0.3; //The minimum std value for the rotation
-        public static final double pRotMax = 1.75; //The maximum std value for the rotation
+        public final static double pMaxAmbiguity = 0.2; //THe maximum ambiguity in a target before the pose estimate is trashed
 
         //Apriltag Rejection
         public static final double rMaxTurnSpeed = 30; //RotationsPerMinute
@@ -181,13 +190,13 @@ public class Constants {
         public static final double pPivotA = 0;
         public static final double pPivotV = 0;
         public static final double pPivotG = 0;
-        public static final double pPivotP = 5;
+        public static final double pPivotP = 15;
         public static final double pPivotI = 0;
         public static final double pPivotD = 0;
 
         //Motor Configs
         public static final double cRollerGearRatio = 1.5;
-        public static final double cPivotGearRatio = 0.111;
+        public static final double cPivotGearRatio = 9;
         
         public static final int cRollerCurrentLimit = 50;
         public static final int cPivotCurrentLimit = 50;
@@ -195,11 +204,11 @@ public class Constants {
         //Tolerances
 
         public static final double tRollerTolerance = 1; //RotationsPerSecond
-        public static final double tPivotTolerance = 5; //Rotations
+        public static final double tPivotTolerance = 0.04; //Rotations
 
         //Misc
-        public static final double kPivotOpenPosition = 260; //Rotations | The encoder rotation value when the intake is OPEN
-        public static final double kPivotClosedPosition = 90; //Rotations | The encoder rotation value when the intake is CLOSED //TODO
+        public static final double kPivotOpenPosition = 3.28; //Rotations | The encoder rotation value when the intake is OPEN
+        public static final double kPivotClosedPosition = 1.25; //Rotations | The encoder rotation value when the intake is CLOSED
         public static final double kRollerSpeed = 65; //RotationsPerSecond
 
         public static final double kOscillateWaitTime = 1.5; //Seconds | How much time the IntakeOScillate command waits before starting in the Shoot command
@@ -213,7 +222,7 @@ public class Constants {
         public static final double pIndexerS = 0.2;
         public static final double pIndexerA = 0;
         public static final double pIndexerV = 0;
-        public static final double pIndexerP = 120;
+        public static final double pIndexerP = 20;
         public static final double pIndexerI = 0;
         public static final double pIndexerD = 0;
 
@@ -222,7 +231,7 @@ public class Constants {
         public static final double mmIndexerJerk = 1000;
 
         //Motor Configs
-        public static final double cIndexerGearRatio = 1.5;
+        public static final double cIndexerGearRatio = 2.5;
         public static final int cIndexerCurrentLimit = 120;
         public static final double cIndexerSupplyCurrentLimit = 50;
 
@@ -230,7 +239,7 @@ public class Constants {
         public static final double tIndexerTolerance = 1; //RotationsPerSecond
 
         //Misc
-        public static final double kIndexerSpeed = 20; //RotationsPerSecond
+        public static final double kIndexerSpeed = 30; //RotationsPerSecond
     }
     public class sShooter{
         //Devide IDs
@@ -305,7 +314,7 @@ public class Constants {
 
         //Tolerances
         public static final double tFlywheelTolerance = 4; //RotationsPerSecond
-        public static final double tHoodTolerance = 0.5; //Degrees
+        public static final double tHoodTolerance = 0.6; //Degrees
         public static final double tKickerTolerance = 0.5; //RotationsPerSecond
 
         //Misc
@@ -326,7 +335,7 @@ public class Constants {
 
         public static final double kIdealAngle = -34; //Degrees
 
-        public static final double kFlywheelMult = 0.8989999; //The multiplier on the distance calculation
+        public static final double kFlywheelMult = 0.898859; //The multiplier on the distance calculation
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
         public static final double kAutoMaxShootTime = 2; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
@@ -335,6 +344,6 @@ public class Constants {
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
         
-        public static final double kHoodEncoderMagnetOffset = 0.071045; //The offset used by the CANcoder
+        public static final double kHoodEncoderMagnetOffset = 0.070557; //The offset used by the CANcoder
     }
 }

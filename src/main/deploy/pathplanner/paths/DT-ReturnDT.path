@@ -36,15 +36,24 @@
         "y": 7.182064056939502
       },
       "prevControl": {
-        "x": 4.111326347939072,
-        "y": 7.1677142039036275
+        "x": 3.729620403321471,
+        "y": 7.526358244365362
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "DT-ReturnDT"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.0212765957446792,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.8164893617021332,
+      "rotationDegrees": 0.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],

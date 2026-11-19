@@ -25,6 +25,7 @@ public class Shoot extends Command{
     boolean isIndexerStarted = false;
 
     Timer timer = new Timer();
+    Timer startTimer = new Timer();
     double endTime;
 
     public Shoot(double endTime){
@@ -72,6 +73,7 @@ public class Shoot extends Command{
 
     @Override
     public void initialize(){
+        startTimer.restart();
         isIndexerStarted = false;
 
         //Getting the target RPS and angle data
@@ -101,11 +103,14 @@ public class Shoot extends Command{
         if(
         Math.abs(shooter.GetFlywheelVelocity() - TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
         Math.abs(shooter.GetHoodAngle() - TargetAngle) < Constants.sShooter.tHoodTolerance &&
-        !isIndexerStarted
+        !isIndexerStarted &&
+        startTimer.hasElapsed(1)
         ){
             indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);
             shooter.KickerMove(Constants.sShooter.kKickerSpeed);
             isIndexerStarted = true;
+            startTimer.stop();
+            startTimer.reset();
         }
     }
 
@@ -113,7 +118,9 @@ public class Shoot extends Command{
     public boolean isFinished(){
         if(!isIndexerStarted && !timer.isRunning() && !shooter.BeamBreakDetected()){
             timer.start();
+            System.out.println("timer started");
         } else if(shooter.BeamBreakDetected()){
+            System.out.println("timer stopped");
             timer.stop();
             timer.reset();
         }

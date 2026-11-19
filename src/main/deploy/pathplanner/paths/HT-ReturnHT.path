@@ -36,15 +36,24 @@
         "y": 0.9417319098457893
       },
       "prevControl": {
-        "x": 3.6680298949505845,
-        "y": 0.9591306851042158
+        "x": 2.9137206913986624,
+        "y": 0.743575912569639
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "H-ReturnHT"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.8617021276595749,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 1.5904255319149072,
+      "rotationDegrees": 0.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [

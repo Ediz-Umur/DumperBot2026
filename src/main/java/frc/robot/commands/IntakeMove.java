@@ -16,6 +16,7 @@ public class IntakeMove extends Command{
     }
 
     public IntakeMove(String forcedPosition){
+        System.out.println("test");
         this.forcedPosition = forcedPosition;
         addRequirements(intake);
         isForced = true;

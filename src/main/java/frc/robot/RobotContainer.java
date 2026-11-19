@@ -130,7 +130,7 @@ public class RobotContainer {
             joystick.options().onTrue(new InstantCommand(() -> Constants.drivetrain.resetRotation(new Rotation2d(0))));
 
             //Test Inputs
-            joystick.povUp().onTrue(new IntakeMove("zero"));
+            //joystick.povUp().onTrue(new IntakeMove("zero"));
 
             joystick.povDown().onTrue(new AlignDrivetrain("hub"));
 
