@@ -94,36 +94,7 @@ public class Shoot extends Command{
     }
 
     @Override
-    public void execute(){
-        //Getting the real RPS and angle (THIS IS JUST FOR TESTING, DELETE WHEN DONE) //TODO
-        SmartDashboard.putNumber("Flywheel RPS", shooter.GetFlywheelVelocity());
-        SmartDashboard.putNumber("Hood Angle", shooter.GetHoodAngle());
-
-        //Checks whether everything is up to speed, and starts the indexer if everything is ready
-        if(
-        Math.abs(shooter.GetFlywheelVelocity() - TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
-        Math.abs(shooter.GetHoodAngle() - TargetAngle) < Constants.sShooter.tHoodTolerance &&
-        !isIndexerStarted &&
-        startTimer.hasElapsed(1)
-        ){
-            indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);
-            shooter.KickerMove(Constants.sShooter.kKickerSpeed);
-            isIndexerStarted = true;
-            startTimer.stop();
-            startTimer.reset();
-        }
-    }
-
-    @Override
     public boolean isFinished(){
-        if(!isIndexerStarted && !timer.isRunning() && !shooter.BeamBreakDetected()){
-            timer.start();
-            System.out.println("timer started");
-        } else if(shooter.BeamBreakDetected()){
-            System.out.println("timer stopped");
-            timer.stop();
-            timer.reset();
-        }
         if(timer.hasElapsed(endTime)){
             SmartDashboard.putString("End Reason", "Timer Ran Out");
             timer.stop();
@@ -147,10 +118,37 @@ public class Shoot extends Command{
     }
 
     @Override
+    public void execute(){
+        if(!isIndexerStarted && !timer.isRunning() && !shooter.BeamBreakDetected()){
+            timer.start();
+        } else if(shooter.BeamBreakDetected()){
+            timer.stop();
+            timer.reset();
+        }
+        
+        //Getting the real RPS and angle (THIS IS JUST FOR TESTING, DELETE WHEN DONE) //TODO
+        SmartDashboard.putNumber("Flywheel RPS", shooter.GetFlywheelVelocity());
+        SmartDashboard.putNumber("Hood Angle", shooter.GetHoodAngle());
+
+        //Checks whether everything is up to speed, and starts the indexer if everything is ready
+        if(
+        Math.abs(shooter.GetFlywheelVelocity() - TargetRPS) < Constants.sShooter.tFlywheelTolerance &&
+        Math.abs(shooter.GetHoodAngle() - TargetAngle) < Constants.sShooter.tHoodTolerance &&
+        !isIndexerStarted &&
+        startTimer.hasElapsed(0.2)
+        ){
+            indexer.IndexerMove(Constants.sIndexer.kIndexerSpeed);
+            shooter.KickerMove(Constants.sShooter.kKickerSpeed);
+            isIndexerStarted = true;
+            startTimer.stop();
+            startTimer.reset();
+        }
+    }
+
+    @Override
     public void end(boolean isInterrupted){
         timer.stop();
         timer.reset();
-        System.out.println("Command ended");
         shooter.FlywheelStop();
         shooter.KickerStop();
         shooter.HoodMove(Constants.sShooter.kHoodClosedAngle);

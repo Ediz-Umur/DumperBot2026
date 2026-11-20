@@ -77,7 +77,7 @@ public class Shooter extends SubsystemBase {
         m_LeftFlywheelConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withSupplyCurrentLimit(Constants.sShooter.cFlywheelSupplyCurrentLimit));
         m_HoodConfiguration.withCurrentLimits(new CurrentLimitsConfigs().withSupplyCurrentLimit(Constants.sShooter.cHoodCurrentLimit));
 
-        //CANcoder Configs (Currently on FUSED, fallback is REMOTE)
+        //CANcoder Configs
         m_EncoderConfigs.MagnetSensor.MagnetOffset = Constants.sShooter.fMagnetOffset;
         m_EncoderConfigs.MagnetSensor.AbsoluteSensorDiscontinuityPoint = Constants.sShooter.fDiscontinuityPoint;
         m_EncoderConfigs.MagnetSensor.SensorDirection = Constants.sShooter.fSensorDirection;
@@ -198,7 +198,7 @@ public class Shooter extends SubsystemBase {
 
     //Gets whether the CANRange detected something
     public boolean BeamBreakDetected(){
-        return(m_RangeLeft.getIsDetected().asSupplier().get() && m_RangeRight.getIsDetected().asSupplier().get());
+        return(m_RangeLeft.getIsDetected().asSupplier().get() || m_RangeRight.getIsDetected().asSupplier().get());
     }
 
     //Stops kicker motor

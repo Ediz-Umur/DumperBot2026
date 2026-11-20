@@ -254,13 +254,13 @@ public class Constants {
         public static final int dRangeRight = 48;
 
         //CANCoder Configs
-        public static final double fMagnetOffset = 0.0;
+        public static final double fMagnetOffset = -0.668701171875;
         public static final double fDiscontinuityPoint = 1;
         public static final SensorDirectionValue fSensorDirection = SensorDirectionValue.Clockwise_Positive;
 
         //CANRange Configs
         public static final double rDetectionRange = 0.35; //Meters | The treshold for the detection range, any distance below this is considered "detected"
-        public static final double rMinSignalStrength = 2500; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
+        public static final double rMinSignalStrength = 4000; //The minimum strength allowed for CANRange value to be valid. Set this to the lowest value seen when a valid detection is up
 
         //PID Gains
         public static final double cFlywheelS = 0.03;
@@ -318,7 +318,7 @@ public class Constants {
         public static final double tKickerTolerance = 0.5; //RotationsPerSecond
 
         //Misc
-        public static final double kKickerSpeed = 20; //RotationsPerSecond
+        public static final double kKickerSpeed = 30; //RotationsPerSecond
 
         public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond
         public static final double kFlywheelFeedSpeed = 40; //RotationsPerSecond | The speed of the flywheel while feeding
@@ -333,7 +333,7 @@ public class Constants {
         public static final double kFlywheelHeight = 0.43; //Meters
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0.335);
 
-        public static final double kIdealAngle = -34; //Degrees
+        public static final double kIdealAngle = -36; //Degrees
 
         public static final double kFlywheelMult = 0.898859; //The multiplier on the distance calculation
 
@@ -344,6 +344,6 @@ public class Constants {
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
         
-        public static final double kHoodEncoderMagnetOffset = 0.070557; //The offset used by the CANcoder
+        public static final double kHoodEncoderMagnetOffset = -0.106445; //The offset used by the CANcoder
     }
 }

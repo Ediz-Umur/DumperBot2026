@@ -38,7 +38,6 @@ public class Robot extends TimedRobot {
 
         SmartDashboard.putData("Field", field);      
         SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
-
     }
 
     @Override
