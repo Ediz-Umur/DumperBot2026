@@ -254,7 +254,7 @@ public class Constants {
         public static final int dRangeRight = 48;
 
         //CANCoder Configs
-        public static final double fMagnetOffset = -0.668701171875;
+        public static final double fMagnetOffset = -0.68017578125;
         public static final double fDiscontinuityPoint = 1;
         public static final SensorDirectionValue fSensorDirection = SensorDirectionValue.Clockwise_Positive;
 
@@ -321,11 +321,11 @@ public class Constants {
         public static final double kKickerSpeed = 30; //RotationsPerSecond
 
         public static final double kFlywheelMaxSpeed = 100; //RotationPerSecond
-        public static final double kFlywheelFeedSpeed = 40; //RotationsPerSecond | The speed of the flywheel while feeding
+        public static final double kFlywheelFeedSpeed = 70; //RotationsPerSecond | The speed of the flywheel while feeding
         
         public static final double kHoodMinAngle = 10; //Degrees
         public static final double kHoodMaxAngle = 30; //Degrees
-        public static final double kHoodFeedAngle = 15;//Degrees
+        public static final double kHoodFeedAngle = 18;//Degrees
         public static final double kHoodClosedAngle = 2; //Degrees | The angle of the hood when it is not in use //TODO
 
         public static final double kFlywheelRadius = 0.04; //Meters
@@ -333,9 +333,9 @@ public class Constants {
         public static final double kFlywheelHeight = 0.43; //Meters
         public static final Translation2d kFlywheelOffsetFromCenter = new Translation2d(0, 0.335);
 
-        public static final double kIdealAngle = -36; //Degrees
+        public static final double kApexHeight = 1.6; //Meters | How talles the apex height is then the hub height of the ball 
 
-        public static final double kFlywheelMult = 0.898859; //The multiplier on the distance calculation
+        public static final double kFlywheelMult = 1.25; //The multiplier on the distance calculation
 
         public static final double kTeleopMaxShootTime = 5; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in teleop
         public static final double kAutoMaxShootTime = 2; //Seconds | The maximum amount of time the shooter waits for balls to come in before ending the command in autonomous
@@ -344,6 +344,6 @@ public class Constants {
         public static final double kWarmupMaxDistance = 2; //Meters | The maximum distance the warup command will activate in
         public static final double kWarmupScale = 0.2; //Percentage (1 is 100%) How many percent the flywheel will warmup in, with respect to the calculated speed in the Shoot command
         
-        public static final double kHoodEncoderMagnetOffset = -0.106445; //The offset used by the CANcoder
+        public static final double kHoodEncoderMagnetOffset = 0.104736; //The offset used by the CANcoder
     }
 }

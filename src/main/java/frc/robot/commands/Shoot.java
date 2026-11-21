@@ -17,6 +17,9 @@ public class Shoot extends Command{
     public Indexer indexer = Constants.indexer;
 
     static Translation2d TargetTranslation;
+
+    static double g = 9.81; //Gravity
+
     double TargetRPS;
     double TargetAngle;
     double Distance;
@@ -32,27 +35,23 @@ public class Shoot extends Command{
         this.endTime = endTime;
         addRequirements(shooter, indexer);
     }
-    
-    public double DistanceToRPS(double distance, double angle){
-        //Meters --> RotationPerSecond
 
-        double height = Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight;
-        
-        double Velocity = Math.sqrt((-9.8*Math.pow(distance, 2)*(1 + Math.pow(Math.tan(Math.toRadians(angle)), 2))) / ((2 * height) - 2 * distance * Math.tan(Math.toRadians(angle))));
-        SmartDashboard.putNumber("Raw Target Velocity", Velocity);
+    public double getRPS(double d){
+        double vy = Math.sqrt(2 * g * (Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight + Constants.sShooter.kApexHeight));
+        double t = (vy + Math.sqrt(2 * g * Constants.sShooter.kApexHeight)) / g;
+        double vx = d / t;
 
-        return (2 * Velocity * multiplier) / (0.1237 * Math.PI);
-        //return((Units.radiansPerSecondToRotationsPerMinute(Velocity / Constants.sShooter.kFlywheelRadius)) * multiplier) / 60;
+        SmartDashboard.putNumber("Raw Velocity Value", Math.sqrt(vx * vx + vy * vy));
+
+        return ((Units.radiansPerSecondToRotationsPerMinute(Math.sqrt(vx * vx + vy * vy)) / Constants.sShooter.kFlywheelRadius) / 60) * Constants.sShooter.kFlywheelMult;
     }
 
-    public static double DistanceToAngle(double distance){
-        //Meters --> Degrees
-        
-        double S = Math.toRadians(Constants.sShooter.kIdealAngle);
-        double H = Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight;
+    public static double getAngle(double d){
+        double vy = Math.sqrt(2 * g * (Constants.sFieldElement.kHubHeight - Constants.sShooter.kFlywheelHeight + Constants.sShooter.kApexHeight));
+        double t = (vy + Math.sqrt(2 * g * Constants.sShooter.kApexHeight)) / g;
+        double vx = d / t;
 
-        double Angle = Math.toDegrees(Math.atan((Math.tan(S) * distance - (2 * H)) / -distance));
-        return(Angle);
+        return ((90 - Units.radiansToDegrees(Math.atan2(vy, vx))) - Constants.sShooter.kHoodMinAngle) * 0.9;
     }
 
     public static double getDistance(){
@@ -78,10 +77,8 @@ public class Shoot extends Command{
 
         //Getting the target RPS and angle data
         Distance = getDistance();
-        TargetAngle = DistanceToAngle(Distance);
-        TargetRPS = DistanceToRPS(Distance, TargetAngle);
-
-        TargetAngle = (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle;
+        TargetAngle = getAngle(Distance);
+        TargetRPS = getRPS(Distance);
 
         //Setting flywheel and hood to the desired values
         shooter.FlywheelMove(TargetRPS);

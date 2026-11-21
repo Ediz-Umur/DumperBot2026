@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
             CommandScheduler.getInstance().schedule(new IntakeMove("close"));
         }
 
-        double TargetAngle = Shoot.DistanceToAngle(Shoot.getDistance());
+        double TargetAngle = Shoot.getAngle(Shoot.getDistance());
         TargetAngle = (90 - TargetAngle) - Constants.sShooter.kHoodMinAngle;
         SmartDashboard.putBoolean("Can Shoot", TargetAngle > 0 && TargetAngle < Constants.sShooter.kHoodMaxAngle - Constants.sShooter.kHoodMinAngle);
 
